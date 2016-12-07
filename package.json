@@ -1,5 +1,5 @@
 {
-  "name": "ProtectorAgent",
+  "name": "ProtectorUser",
   "private": true,
   "scripts": {
     "startdev": "meteor --settings private/settings-development.json",
