@@ -23,13 +23,13 @@ export default function (injectDeps, {FlowRouter}) {
   const MainLayoutCtx = injectDeps(Layout);
   const LoginLayoutCtx = injectDeps(LoginLayout);
 
-  var privateRoutes = FlowRouter.group({  
+  var privateRoutes = FlowRouter.group({
     name: 'private',
     triggersEnter: [
 	  checkLoggedIn
     ]
   })
-  
+
   var publicRoutes = FlowRouter.group({
     name: 'public',
     triggersEnter: [
@@ -76,5 +76,13 @@ export default function (injectDeps, {FlowRouter}) {
         content: () => (<Login />)
       });
     }
-  });  
+  });
+
+  publicRoutes.route('/backendUrl', {
+    name: 'payment.backendUrl',
+    action() {
+      return "nothing";
+      console.log("inside backendUrl");
+    }
+  });
 }
