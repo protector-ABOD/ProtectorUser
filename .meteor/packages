@@ -29,3 +29,5 @@ accounts-facebook
 abod:cordova-fb
 accounts-password
 underscore
+http
+jparker:crypto-sha1
