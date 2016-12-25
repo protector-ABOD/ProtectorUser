@@ -1,18 +1,23 @@
 import RequestAgent from '../components/RequestAgent.jsx';
 import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
-export const composer = ({context, clearErrors}, onData) => {
-  const {LocalState} = context();
-  const error = LocalState.get('ERROR');
-  onData(null, {error});
-
-  // clearErrors when unmounting the component
-  return clearErrors;
+export const composer = ({context}, onData) => {
+  const {Meteor, Collections} = context();
+  if (Meteor.subscribe('matchmaker.servicetypes').ready() &&
+  Meteor.subscribe('matchmaker.servicedurations').ready() &&
+  Meteor.subscribe('matchmaker.state').ready()) {
+    const services = Collections.ServiceType.find().fetch();
+    const serviceDurations = Collections.ServiceDuration.find().fetch();
+    const states = Collections.State.find().fetch();
+    onData(null, {services, serviceDurations, states});
+  } else {
+    onData();
+  }
 };
 
 export const depsMapper = (context, actions) => ({
-  storeUsersRequestIntoDB: actions.matchmaker.storeUsersRequestIntoDB,
-  searchForMatchingAgents: actions.matchmaker.searchForMatchingAgents,
+  searchForServices: actions.matchmaker.searchForServices,
+  selectAgent: actions.matchmaker.selectAgent,
   context: () => context
 });
 

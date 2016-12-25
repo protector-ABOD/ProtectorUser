@@ -1,4 +1,4 @@
-import {Agents} from '/lib/collections';
+import {Agents, ServiceType, ServiceDuration, State} from '/lib/collections';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
@@ -19,4 +19,20 @@ export default function () {
     const selector = {UserID: userID};
     return Agents.find(selector);
   });
+
+  Meteor.publish('matchmaker.servicetypes', function () {
+    const selector = {};
+    return ServiceType.find(selector);
+  });
+
+  Meteor.publish('matchmaker.servicedurations', function () {
+    const selector = {Active_Status: 1};
+    return ServiceDuration.find(selector);
+  });
+
+  Meteor.publish('matchmaker.state', function () {
+    const selector = {};
+    return State.find(selector);
+  });
+
 }

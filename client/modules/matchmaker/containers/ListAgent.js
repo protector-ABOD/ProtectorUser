@@ -11,7 +11,7 @@ export const composer = ({context, clearErrors}, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
-  selectAnAgent: actions.matchmaker.selectAnAgent,
+  selectAgent: actions.matchmaker.selectAgent,
   context: () => context
 });
 
