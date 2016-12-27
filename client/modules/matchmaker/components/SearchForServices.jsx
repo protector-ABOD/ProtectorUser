@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class RequestAgent extends React.Component {
+class SearchForServices extends React.Component {
 
 	constructor(props, context) {
 		super(props, context);

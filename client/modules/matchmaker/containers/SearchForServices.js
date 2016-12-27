@@ -1,4 +1,4 @@
-import RequestAgent from '../components/RequestAgent.jsx';
+import SearchForServices from '../components/SearchForServices.jsx';
 import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
 export const composer = ({context}, onData) => {
@@ -17,11 +17,10 @@ export const composer = ({context}, onData) => {
 
 export const depsMapper = (context, actions) => ({
   searchForServices: actions.matchmaker.searchForServices,
-  selectAgent: actions.matchmaker.selectAgent,
   context: () => context
 });
 
 export default composeAll(
   composeWithTracker(composer),
   useDeps(depsMapper)
-)(RequestAgent);
+)(SearchForServices);

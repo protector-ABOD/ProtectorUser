@@ -1,0 +1,49 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'startdev' ]
+2 info using npm@3.10.10
+3 info using node@v7.2.1
+4 verbose run-script [ 'prestartdev', 'startdev', 'poststartdev' ]
+5 info lifecycle ProtectorUser@~prestartdev: ProtectorUser@
+6 silly lifecycle ProtectorUser@~prestartdev: no script for prestartdev, continuing
+7 info lifecycle ProtectorUser@~startdev: ProtectorUser@
+8 verbose lifecycle ProtectorUser@~startdev: unsafe-perm in lifecycle true
+9 verbose lifecycle ProtectorUser@~startdev: PATH: C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;C:\PU\node_modules\.bin;C:\Users\Justin\AppData\Local\Apps\2.0\CBAVE9BB.MQX\OXCXTV78.N2N\gith..tion_317444273a93ac29_0003.0003_665ccbdbd3c2d8d4\NativeBinaries\x86;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\Justin\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Skype\Phone\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\wamp64\bin\php\php7.0.10;C:\ProgramData\ComposerSetup\bin;C:\HashiCorp\Vagrant\bin;C:\Program Files (x86)\Heroku\bin;C:\Program Files (x86)\git\cmd;C:\Program Files (x86)\Git\cmd;C:\Program Files\nodejs\;C:\Users\Justin\AppData\Local\Microsoft\WindowsApps;C:\Users\Justin\AppData\Roaming\Composer\vendor\bin;C:\Users\Justin\AppData\Local\.meteor\;C:\Users\Justin\AppData\Local\atom\bin;C:\Users\Justin\AppData\Roaming\npm
+10 verbose lifecycle ProtectorUser@~startdev: CWD: C:\PU
+11 silly lifecycle ProtectorUser@~startdev: Args: [ '/d /s /c',
+11 silly lifecycle   'meteor --settings private/settings-development.json' ]
+12 silly lifecycle ProtectorUser@~startdev: Returned: code: 3221225786  signal: null
+13 info lifecycle ProtectorUser@~startdev: Failed to exec startdev script
+14 verbose stack Error: ProtectorUser@ startdev: `meteor --settings private/settings-development.json`
+14 verbose stack Exit status 3221225786
+14 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:255:16)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at EventEmitter.emit (events.js:191:7)
+14 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:40:14)
+14 verbose stack     at emitTwo (events.js:106:13)
+14 verbose stack     at ChildProcess.emit (events.js:191:7)
+14 verbose stack     at maybeClose (internal/child_process.js:885:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+15 verbose pkgid ProtectorUser@
+16 verbose cwd C:\PU
+17 error Windows_NT 10.0.14393
+18 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "startdev"
+19 error node v7.2.1
+20 error npm  v3.10.10
+21 error code ELIFECYCLE
+22 error ProtectorUser@ startdev: `meteor --settings private/settings-development.json`
+22 error Exit status 3221225786
+23 error Failed at the ProtectorUser@ startdev script 'meteor --settings private/settings-development.json'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the ProtectorUser package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     meteor --settings private/settings-development.json
+23 error You can get information on how to open an issue for this project with:
+23 error     npm bugs ProtectorUser
+23 error Or if that isn't available, you can get their info via:
+23 error     npm owner ls ProtectorUser
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

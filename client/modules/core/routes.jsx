@@ -5,7 +5,7 @@ import Layout from './components/MainLayout.jsx';
 import LoginLayout from './components/LoginLayout.jsx';
 import Home from './components/Home.jsx';
 import Login from '../users/containers/Login.js';
-import RequestAgent from '../matchmaker/containers/RequestAgent.js';
+import SearchForServices from '../matchmaker/containers/SearchForServices.js';
 import UserHome from '../users/containers/UserHome.js';
 
 function redirectIfLoggedIn (ctx, redirect) {
@@ -83,7 +83,7 @@ export default function (injectDeps, {FlowRouter}) {
     name: 'test.matchmaker',
     action() {
       mount(LoginLayoutCtx, {
-        content: () => (<RequestAgent />)
+        content: () => (<SearchForServices />)
       });
     }
   });
