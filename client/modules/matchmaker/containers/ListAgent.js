@@ -12,6 +12,7 @@ export const composer = ({context, clearErrors}, onData) => {
 
 export const depsMapper = (context, actions) => ({
   selectAgent: actions.matchmaker.selectAgent,
+  searchForMatchingAgents: actions.matchmaker.searchForMatchingAgents,
   context: () => context
 });
 

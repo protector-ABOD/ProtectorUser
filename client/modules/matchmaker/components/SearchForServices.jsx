@@ -30,7 +30,7 @@ class SearchForServices extends React.Component {
 									<select className="form-control" ref="serviceType">
 						      {
 						        this.props.services.map(function(service) {
-						            return <option key={service.Name} value={service._id}>{service.Name}</option>
+						            return <option key={service.Description} value={service.Code}>{service.Description}</option>
 						        })
 						      }
 						      </select>
@@ -42,7 +42,7 @@ class SearchForServices extends React.Component {
 									<select className="form-control" ref="serviceLocation">
 						      {
 						        this.props.states.map(function(state) {
-						            return <option key={state.Name} value={state._id}>{state.Name}</option>
+						            return <option key={state.Description} value={state.Code}>{state.Description}</option>
 						        })
 						      }
 						      </select>
@@ -57,10 +57,14 @@ class SearchForServices extends React.Component {
 									<select className="form-control" ref="serviceDuration">
 						      {
 						        this.props.serviceDurations.map(function(serviceDuration) {
-						            return <option key={serviceDuration.Name} value={serviceDuration.Value}>{serviceDuration.Name}</option>
+						            return <option key={serviceDuration.Description} value={serviceDuration.Value}>{serviceDuration.Description}</option>
 						        })
 						      }
 						      </select>
+									{/*<input type="number" className="form-control" id="duration" ref="duration"/>*/}
+								</div>
+								<div className="row pad-top-fixed-15">
+                  Price:
 									{/*<input type="number" className="form-control" id="duration" ref="duration"/>*/}
 								</div>
 								<div className="row pad-top-fixed-15">
@@ -84,10 +88,16 @@ class SearchForServices extends React.Component {
     const {searchForServices} = this.props;
     const {serviceType, serviceLocation, startDatetime, serviceDuration} = this.refs;
 
-    searchForServices(serviceType.value, serviceLocation.value, startDatetime.value, serviceDuration.value);
+		var serviceRequest = {};
+		serviceRequest["serviceType"] = serviceType.value;
+		serviceRequest["serviceLocation"] = serviceLocation.value;
+		serviceRequest["startDatetime"] = startDatetime.value;
+		serviceRequest["serviceDuration"] = serviceDuration.value;
+
+    searchForServices(serviceRequest);
   }
 
 
 }
 
-export default RequestAgent;
+export default SearchForServices;

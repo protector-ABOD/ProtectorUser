@@ -3,12 +3,15 @@ import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
 export const composer = ({context}, onData) => {
   const {Meteor, Collections} = context();
-  if (Meteor.subscribe('matchmaker.servicetypes').ready() &&
-  Meteor.subscribe('matchmaker.servicedurations').ready() &&
-  Meteor.subscribe('matchmaker.state').ready()) {
-    const services = Collections.ServiceType.find().fetch();
-    const serviceDurations = Collections.ServiceDuration.find().fetch();
-    const states = Collections.State.find().fetch();
+  if (Meteor.subscribe('matchmaker.codetable').ready()) {
+    const services = Collections.CodeTable.findOne({Category: "ServiceType"}).ValueList;
+    const serviceDurations = Collections.CodeTable.findOne({Category: "ServiceDuration"}).ValueList;
+    const country = Collections.CodeTable.findOne({Category: "Country"}).ValueList;
+    const states = country[0].States;
+    console.log(services);
+    console.log(serviceDurations);
+    console.log(country);
+    console.log(states);
     onData(null, {services, serviceDurations, states});
   } else {
     onData();
