@@ -6,7 +6,7 @@ import LoginLayout from './components/LoginLayout.jsx';
 import Home from './components/Home.jsx';
 import Login from '../users/containers/Login.js';
 import SearchForServices from '../matchmaker/containers/SearchForServices.js';
-import ListAgent from '../matchmaker/containers/ListAgent.js';
+import ListAgents from '../matchmaker/containers/ListAgents.js';
 import UserHome from '../users/containers/UserHome.js';
 
 function redirectIfLoggedIn (ctx, redirect) {
@@ -89,11 +89,11 @@ export default function (injectDeps, {FlowRouter}) {
     }
   });
 
-  publicRoutes.route('/test/matchmaker/:_id', {
-    name: 'test.matchmaker.newrequest',
+  publicRoutes.route('/test/matchmaker/selection', {
+    name: 'test.matchmaker.selection',
     action({_id}) {
       mount(LoginLayoutCtx, {
-        content: () => (<ListAgent _id={_id}/>)
+        content: () => (<ListAgents />)
       });
     }
   });

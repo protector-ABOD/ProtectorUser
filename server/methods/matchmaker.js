@@ -44,8 +44,8 @@ export default function () {
       //insert user request into db
       //return requestId
     },
-    'matchmaker.searchForMatchingAgents'(serviceRequestId) {
-      check(serviceRequestId, Number);
+    'matchmaker.searchForMatchingAgents'(serviceRequest) {
+      check(serviceRequest, Object);
       const agents = Agents.find().fetch();
       return agents;
       //Find Agents -> Where CanProvideRequestedServiceType, IsInSameLocation, IsAvailableToWork

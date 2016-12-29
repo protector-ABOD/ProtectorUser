@@ -5,7 +5,16 @@ class SearchForServices extends React.Component {
 
 	constructor(props, context) {
 		super(props, context);
+		this.state = {value: ''};
+
+		this.handleServiceTypeChange = this.handleServiceTypeChange.bind(this);
   }
+
+	handleServiceTypeChange(event) {
+		console.log(event.target);
+		this.setState({value: event.target.value});
+	    //this.setState({[e.target.name] : e.target.value});
+	}
 
 	render() {
 		const {error} = this.props;
@@ -27,10 +36,10 @@ class SearchForServices extends React.Component {
 								<div className="row pad-top-fixed-15">
                   Service Type:
 
-									<select className="form-control" ref="serviceType">
+									<select className="form-control" ref="serviceType" onChange={this.handleServiceTypeChange.bind(this)}>
 						      {
 						        this.props.services.map(function(service) {
-						            return <option key={service.Description} value={service.Code}>{service.Description}</option>
+						            return <option key={service.Description} price={service.Price} value={service.Code}>{service.Description}</option>
 						        })
 						      }
 						      </select>
@@ -64,7 +73,7 @@ class SearchForServices extends React.Component {
 									{/*<input type="number" className="form-control" id="duration" ref="duration"/>*/}
 								</div>
 								<div className="row pad-top-fixed-15">
-                  Price:
+                  Price: <p>{this.state.value}</p>
 									{/*<input type="number" className="form-control" id="duration" ref="duration"/>*/}
 								</div>
 								<div className="row pad-top-fixed-15">
@@ -96,6 +105,8 @@ class SearchForServices extends React.Component {
 
     searchForServices(serviceRequest);
   }
+
+
 
 
 }

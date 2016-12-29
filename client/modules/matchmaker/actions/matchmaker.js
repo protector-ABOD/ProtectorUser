@@ -3,17 +3,19 @@ export default {
     return LocalState.set('ERROR', null);
   },
   searchForServices({Meteor, LocalState}, serviceRequest) {
+    Session.set("ServiceRequest", serviceRequest);
+    FlowRouter.go('/test/matchmaker/selection');
     //
-    Meteor.call('matchmaker.searchForServices', serviceRequest, (err, response) => {
-      console.log(response);
-
-      if (err) {
-        return LocalState.set('ERROR', err.message);
-      }
-      if(response.serviceRequestId){
-        FlowRouter.go('/test/matchmaker/' + response.serviceRequestId._str);
-      }
-    })
+    // Meteor.call('matchmaker.searchForServices', serviceRequest, (err, response) => {
+    //   console.log(response);
+    //
+    //   if (err) {
+    //     return LocalState.set('ERROR', err.message);
+    //   }
+    //   if(response.serviceRequestId){
+    //     FlowRouter.go('/test/matchmaker/' + response.serviceRequestId._str);
+    //   }
+    // })
   },
   searchForMatchingAgents({Meteor, LocalState}, _id) {
     //
