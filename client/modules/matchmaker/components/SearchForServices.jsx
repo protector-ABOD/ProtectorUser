@@ -16,6 +16,13 @@ class SearchForServices extends React.Component {
 	    //this.setState({[e.target.name] : e.target.value});
 	}
 
+	getISOStringWithoutSecsAndMillisecs1(date) {
+	  const dateAndTime = date.toISOString().split('T')
+	  const time = dateAndTime[1].split(':')
+
+	  return dateAndTime[0]+'T'+time[0]+':'+time[1]
+	}
+
 	render() {
 		const {error} = this.props;
 
@@ -59,7 +66,7 @@ class SearchForServices extends React.Component {
 								</div>
                 <div className="row pad-top-fixed-15">
                   Start DateTime:
-									<input type="datetime-local" className="form-control" id="startDatetime" ref="startDatetime"/>
+									<input type="datetime-local" className="form-control" id="startDatetime" min={this.getISOStringWithoutSecsAndMillisecs1(new Date())} ref="startDatetime"/>
 								</div>
                 <div className="row pad-top-fixed-15">
                   Duration:
