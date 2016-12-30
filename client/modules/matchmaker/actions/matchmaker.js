@@ -27,9 +27,9 @@ export default {
       return response;
     })
   },
-  selectAgent({Meteor, LocalState}) {
+  requestForAgent({Meteor, LocalState}, serviceRequest, agent) {
     //
-    Meteor.call('matchmaker.selectAgent', agentId, requestId, (err, response) => {
+    Meteor.call('matchmaker.requestForAgent', serviceRequest, agent, (err, response) => {
       console.log(response);
       if (err) {
         return LocalState.set('ERROR', err.message);

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AgentSummary from './AgentSummary.jsx' ;
+import AgentSummary from '../containers/AgentSummary.js' ;
 
 class ListAgents extends React.Component {
 
