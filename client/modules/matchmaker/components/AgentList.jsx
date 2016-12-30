@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AgentSummary from '../containers/AgentSummary.js' ;
 
-class ListAgents extends React.Component {
+class AgentList extends React.Component {
 
 	constructor(props, context) {
 		super(props, context);
@@ -28,4 +28,4 @@ class ListAgents extends React.Component {
 	}
 }
 
-export default ListAgents;
+export default AgentList;

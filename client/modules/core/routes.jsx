@@ -6,7 +6,7 @@ import LoginLayout from './components/LoginLayout.jsx';
 import Home from './components/Home.jsx';
 import Login from '../users/containers/Login.js';
 import SearchForServices from '../matchmaker/containers/SearchForServices.js';
-import ListAgents from '../matchmaker/containers/ListAgents.js';
+import AgentList from '../matchmaker/containers/AgentList.js';
 import UserHome from '../users/containers/UserHome.js';
 
 function redirectIfLoggedIn (ctx, redirect) {
@@ -80,8 +80,8 @@ export default function (injectDeps, {FlowRouter}) {
     }
   });
 
-  publicRoutes.route('/test/matchmaker', {
-    name: 'test.matchmaker',
+  privateRoutes.route('/services/search', {
+    name: 'services.search',
     action() {
       mount(LoginLayoutCtx, {
         content: () => (<SearchForServices />)
@@ -89,11 +89,11 @@ export default function (injectDeps, {FlowRouter}) {
     }
   });
 
-  publicRoutes.route('/test/matchmaker/selection', {
-    name: 'test.matchmaker.selection',
+  privateRoutes.route('/services/agent-listing', {
+    name: 'services.agent-listing',
     action({_id}) {
       mount(LoginLayoutCtx, {
-        content: () => (<ListAgents />)
+        content: () => (<AgentList />)
       });
     }
   });

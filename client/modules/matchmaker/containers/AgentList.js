@@ -1,4 +1,4 @@
-import ListAgents from '../components/ListAgents.jsx';
+import AgentList from '../components/AgentList.jsx';
 import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
 export const composer = ({context, clearErrors}, onData) => {
@@ -12,7 +12,7 @@ export const composer = ({context, clearErrors}, onData) => {
 
     });
   } else {
-    FlowRouter.go('/test/matchmaker/');
+    FlowRouter.go('/services/search');
   }
 };
 
@@ -25,4 +25,4 @@ export const depsMapper = (context, actions) => ({
 export default composeAll(
   composeWithTracker(composer),
   useDeps(depsMapper)
-)(ListAgents);
+)(AgentList);

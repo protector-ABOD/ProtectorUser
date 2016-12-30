@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 
-export default class AgentDetailsPopup extends Component {
+export default class PopupModal extends Component {
   close(e) {
     e.preventDefault()
 
@@ -9,7 +9,7 @@ export default class AgentDetailsPopup extends Component {
       this.props.onClose()
     }
   }
-  
+
   render() {
     if (this.props.isOpen === false)
       return null

@@ -4,19 +4,6 @@ import {check} from 'meteor/check';
 
 export default function () {
   Meteor.methods({
-    'matchmaker.searchForServices'(serviceRequest) {
-      check(serviceRequest, Object);
-
-      console.log(serviceRequest);
-      const serviceRequestId = Meteor.call("matchmaker.storeUsersRequestIntoDB", serviceRequest);
-      console.log(serviceRequestId);
-
-      //var agents = Meteor.call("matchmaker.searchForMatchingAgents", serviceRequestId);
-      //console.log(agents);
-      return serviceRequestId;
-      //insert user request into db
-      //return requestId
-    },
     'matchmaker.storeUsersRequestIntoDB'(serviceRequest, agent) {
       check(serviceRequest, Object);
       check(agent, Object);
@@ -26,7 +13,7 @@ export default function () {
       Service_Request["Service_Start_Time"] = serviceRequest.startDatetime;
       Service_Request["Service_Duration_Value"] = serviceRequest.serviceDuration;
       const serviceRequestId = ServiceRequest.insert({
-        User_ID: "2TSMogoapzapHYMx8", //todo: change to use meteor logged in user
+        User_ID: this.userId, //todo: change to use meteor logged in user
         Agent_ID: agent._id,
         Service_Request: Service_Request,
         Service_Request_Status: "Pending",
@@ -40,8 +27,6 @@ export default function () {
       });
 
       return { serviceRequestId };
-      //insert user request into db
-      //return requestId
     },
     //Find Agents -> Where CanProvideRequestedServiceType, IsInSameLocation, IsAvailableToWork
     'matchmaker.searchForMatchingAgents'(serviceRequest) {
