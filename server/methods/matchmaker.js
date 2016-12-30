@@ -18,8 +18,6 @@ export default function () {
       //return requestId
     },
     'matchmaker.storeUsersRequestIntoDB'(serviceRequest, agent) {
-      console.log("storeUsersRequestIntoDB");
-      console.log(serviceRequest);
       check(serviceRequest, Object);
       check(agent, Object);
       var Service_Request = {};
@@ -27,9 +25,6 @@ export default function () {
       Service_Request["Service_State_Code"] = serviceRequest.serviceLocation;
       Service_Request["Service_Start_Time"] = serviceRequest.startDatetime;
       Service_Request["Service_Duration_Value"] = serviceRequest.serviceDuration;
-      console.log(Service_Request);
-      console.log(agent);
-
       const serviceRequestId = ServiceRequest.insert({
         User_ID: "2TSMogoapzapHYMx8", //todo: change to use meteor logged in user
         Agent_ID: agent._id,
@@ -50,7 +45,12 @@ export default function () {
     },
     'matchmaker.searchForMatchingAgents'(serviceRequest) {
       check(serviceRequest, Object);
-      const agents = Agents.find().fetch();
+
+      var selector = {};
+      if (serviceRequest.serviceType === SERVICETYPE_CODE_ARMED_SECURITY_FORCE) {
+        selector['Skills'] = {$elemMatch: {SkillID:SKILLID_FIREARM, Proficiency: "Yes"}};
+      }
+      const agents = Agents.find(selector).fetch();
       return agents;
       //Find Agents -> Where CanProvideRequestedServiceType, IsInSameLocation, IsAvailableToWork
       //return list of agents
