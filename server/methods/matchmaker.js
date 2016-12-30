@@ -43,17 +43,20 @@ export default function () {
       //insert user request into db
       //return requestId
     },
+    //Find Agents -> Where CanProvideRequestedServiceType, IsInSameLocation, IsAvailableToWork
     'matchmaker.searchForMatchingAgents'(serviceRequest) {
       check(serviceRequest, Object);
 
+      //add queries
       var selector = {};
       if (serviceRequest.serviceType === SERVICETYPE_CODE_ARMED_SECURITY_FORCE) {
         selector['Skills'] = {$elemMatch: {SkillID:SKILLID_FIREARM, Proficiency: "Yes"}};
       }
+
+      //return list of agents
       const agents = Agents.find(selector).fetch();
       return agents;
-      //Find Agents -> Where CanProvideRequestedServiceType, IsInSameLocation, IsAvailableToWork
-      //return list of agents
+
     },
     'matchmaker.requestForAgent'(serviceRequest, agent) {
       check(serviceRequest, Object);

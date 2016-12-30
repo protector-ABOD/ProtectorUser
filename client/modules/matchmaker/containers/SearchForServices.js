@@ -6,12 +6,11 @@ export const composer = ({context}, onData) => {
   if (Meteor.subscribe('matchmaker.codetable').ready()) {
     const services = Collections.CodeTable.findOne({Category: "ServiceType"}).ValueList;
     const serviceDurations = Collections.CodeTable.findOne({Category: "ServiceDuration"}).ValueList;
-    const country = Collections.CodeTable.findOne({Category: "Country"}).ValueList;
-    const states = country[0].States;
-    console.log(services);
-    console.log(serviceDurations);
-    console.log(country);
-    console.log(states);
+    const countries = Collections.CodeTable.findOne({Category: "Country"}).ValueList;
+    const states = countries.find(function (country) {
+      return country.Code === COUNTRY_CODE_MALAYSIA;
+    }).States;
+
     onData(null, {services, serviceDurations, states});
   } else {
     onData();
