@@ -8,6 +8,7 @@ import Login from '../users/containers/Login.js';
 import SearchForServices from '../matchmaker/containers/SearchForServices.js';
 import AgentList from '../matchmaker/containers/AgentList.js';
 import UserHome from '../users/containers/UserHome.js';
+import UserProfile from '../users/containers/UserProfile.js'
 
 function redirectIfLoggedIn (ctx, redirect) {
   if (Meteor.userId()) {
@@ -60,6 +61,15 @@ export default function (injectDeps, {FlowRouter}) {
     action() {
       mount(MainLayoutCtx, {
         content: () => (<UserHome />)
+      });
+    }
+  });
+
+  privateRoutes.route('/user/profile', {
+    name: 'user.profile',
+    action(){
+      mount(MainLayoutCtx, {
+        content: () => (<UserProfile />)
       });
     }
   });

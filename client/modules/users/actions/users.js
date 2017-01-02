@@ -22,13 +22,30 @@ export default {
 		if (error) {
 		  LocalState.set('ERROR', 'Failed to create account.');
 		}
+		else{
+			FlowRouter.go('/user/home');
+		}
 	});
   },
   loginWithFacebook({Meteor, LocalState}) {
 	Meteor.loginWithFacebook({}, function(error){
-	  if (error) {
-		LocalState.set('ERROR', 'Failed to login using Facebook.');
-	  }
+	    if (error) {
+			LocalState.set('ERROR', 'Failed to login using Facebook.');
+	    }
+		else{
+			FlowRouter.go('/user/home');
+		}
 	});
+  },
+  updateProfile({Meteor, FlowRouter}, userProfile){
+  	// console.log(Meteor.userId());
+  	Meteor.call('users.updateProfile', userProfile, Meteor.userId(), (err) =>{
+  		if(err){
+  			console.log(err);
+  		}
+  		else{
+  			FlowRouter.go('/user/home')
+  		}
+  	});
   }
 };
