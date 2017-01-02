@@ -1,4 +1,4 @@
-import {Agents} from '/lib/collections';
+import {Agents, ServiceType, ServiceDuration, State, CodeTable} from '/lib/collections';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
@@ -19,4 +19,25 @@ export default function () {
     const selector = {UserID: userID};
     return Agents.find(selector);
   });
+
+  Meteor.publish('matchmaker.codetable', function () {
+    const selector = {};
+    return CodeTable.find(selector);
+  });
+
+  // Meteor.publish('matchmaker.servicetypes', function () {
+  //   const selector = {Category: "ServiceType"};
+  //   return CodeTable.find(selector);
+  // });
+  //
+  // Meteor.publish('matchmaker.servicedurations', function () {
+  //   const selector = {Category: "ServiceDuration"};
+  //   return CodeTable.find(selector);
+  // });
+  //
+  // Meteor.publish('matchmaker.state', function () {
+  //   const selector = {Category: "Country"};
+  //   return CodeTable.find(selector);
+  // });
+
 }

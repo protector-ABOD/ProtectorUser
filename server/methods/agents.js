@@ -44,16 +44,16 @@ export default function () {
 			};
 		agent["skills"] = this.state.skills;
 		*/
-		
+
       const createdAt = new Date();
       const agentToInsert = {
-		UserID : userId,
+	      UserID : userId,
         FullName : agent.fullName,
         Email : agent.email,
         MobileNumber : agent.mobileNumber,
-		NRIC : agent.nricLeft + agent.nricMiddle + agent.nricRight,
-		Gender : agent.gender,
-		Race : agent.race,
+	      NRIC : agent.nricLeft + agent.nricMiddle + agent.nricRight,
+	      Gender : agent.gender,
+	      Race : agent.race,
 		/*Address : agent.address,
 		AddressCity : agent.addressCity,
 		AddressPostcode : agent.addressPostcode,
@@ -72,7 +72,7 @@ export default function () {
         CreatedDateTime : createdAt,
 		CreatedBy : userId
       };
-		
+
       Agents.insert(agentToInsert);
     }
   });

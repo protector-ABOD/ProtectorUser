@@ -5,6 +5,8 @@ import Layout from './components/MainLayout.jsx';
 import LoginLayout from './components/LoginLayout.jsx';
 import Home from './components/Home.jsx';
 import Login from '../users/containers/Login.js';
+import SearchForServices from '../matchmaker/containers/SearchForServices.js';
+import AgentList from '../matchmaker/containers/AgentList.js';
 import UserHome from '../users/containers/UserHome.js';
 
 function redirectIfLoggedIn (ctx, redirect) {
@@ -23,13 +25,13 @@ export default function (injectDeps, {FlowRouter}) {
   const MainLayoutCtx = injectDeps(Layout);
   const LoginLayoutCtx = injectDeps(LoginLayout);
 
-  var privateRoutes = FlowRouter.group({  
+  var privateRoutes = FlowRouter.group({
     name: 'private',
     triggersEnter: [
 	  checkLoggedIn
     ]
   })
-  
+
   var publicRoutes = FlowRouter.group({
     name: 'public',
     triggersEnter: [
@@ -76,5 +78,23 @@ export default function (injectDeps, {FlowRouter}) {
         content: () => (<Login />)
       });
     }
-  });  
+  });
+
+  privateRoutes.route('/services/search', {
+    name: 'services.search',
+    action() {
+      mount(LoginLayoutCtx, {
+        content: () => (<SearchForServices />)
+      });
+    }
+  });
+
+  privateRoutes.route('/services/agent-listing', {
+    name: 'services.agent-listing',
+    action({_id}) {
+      mount(LoginLayoutCtx, {
+        content: () => (<AgentList />)
+      });
+    }
+  });
 }
