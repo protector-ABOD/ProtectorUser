@@ -7,11 +7,12 @@ export const composer = ({context}, onData) => {
     const services = Collections.CodeTable.findOne({Category: "ServiceType"}).ValueList;
     const serviceDurations = Collections.CodeTable.findOne({Category: "ServiceDuration"}).ValueList;
     const countries = Collections.CodeTable.findOne({Category: "Country"}).ValueList;
-    const states = countries.find(function (country) {
+    const country = countries.find(function (country) {
       return country.Code === COUNTRY_CODE_MALAYSIA;
-    }).States;
+    });
+    const states = country.States;
 
-    onData(null, {services, serviceDurations, states});
+    onData(null, {services, serviceDurations, states, country});
   } else {
     onData();
   }

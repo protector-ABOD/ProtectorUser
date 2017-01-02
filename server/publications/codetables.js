@@ -6,4 +6,9 @@ export default function () {
   Meteor.publish('CodeTable.Bank', function () {
     return CodeTable.find({Category: "Bank"});
   });
+
+  Meteor.publish('matchmaker.codetable', function () {
+    const selector = {};
+    return CodeTable.find(selector);
+  });
 }
