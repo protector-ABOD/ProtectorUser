@@ -6,6 +6,7 @@ import LoginLayout from './components/LoginLayout.jsx';
 import Home from './components/Home.jsx';
 import Login from '../users/containers/Login.js';
 import UserHome from '../users/containers/UserHome.js';
+import UserProfile from '../users/containers/UserProfile.js'
 
 function redirectIfLoggedIn (ctx, redirect) {
   if (Meteor.userId()) {
@@ -58,6 +59,15 @@ export default function (injectDeps, {FlowRouter}) {
     action() {
       mount(MainLayoutCtx, {
         content: () => (<UserHome />)
+      });
+    }
+  });
+
+  privateRoutes.route('/user/profile', {
+    name: 'user.profile',
+    action(){
+      mount(MainLayoutCtx, {
+        content: () => (<UserProfile />)
       });
     }
   });
