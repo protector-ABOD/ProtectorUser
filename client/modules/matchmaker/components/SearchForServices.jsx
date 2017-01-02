@@ -5,14 +5,23 @@ class SearchForServices extends React.Component {
 
 	constructor(props, context) {
 		super(props, context);
-		this.state = {value: ''};
+		this.state = {price: 0};
 
 		this.handleServiceTypeChange = this.handleServiceTypeChange.bind(this);
   }
 
 	handleServiceTypeChange(event) {
 		console.log(event.target);
-		this.setState({value: event.target.value});
+		console.log(this.props.services);
+		const price = this.props.services.find(function (service) {
+      return service.Code === event.target.value;
+    }).Price;
+		const totalPrice = ReactDOM.findDOMNode(this.refs.serviceDuration).value * price;
+		console.log(totalPrice);
+
+
+		this.setState({price: totalPrice});
+
 	    //this.setState({[e.target.name] : e.target.value});
 	}
 
@@ -44,6 +53,7 @@ class SearchForServices extends React.Component {
                   Service Type:
 
 									<select className="form-control" ref="serviceType" onChange={this.handleServiceTypeChange.bind(this)}>
+										<option value=''>Select...</option>
 						      {
 						        this.props.services.map(function(service) {
 						            return <option key={service.Description} price={service.Price} value={service.Code}>{service.Description}</option>
@@ -80,11 +90,11 @@ class SearchForServices extends React.Component {
 									{/*<input type="number" className="form-control" id="duration" ref="duration"/>*/}
 								</div>
 								<div className="row pad-top-fixed-15">
-                  Price: <p>{this.state.value}</p>
+                  Price: <p>{CURRENT_CURRENCY + " " + this.state.price}</p>
 									{/*<input type="number" className="form-control" id="duration" ref="duration"/>*/}
 								</div>
 								<div className="row pad-top-fixed-15">
-									<button type="submit" className="btn btn-success btn-100">Request For Agent</button>
+									<button type="submit" className="btn btn-success btn-100">Search For Services</button>
 								</div>
 							</form>
 						</div>
@@ -109,6 +119,8 @@ class SearchForServices extends React.Component {
 		serviceRequest["serviceLocation"] = serviceLocation.value;
 		serviceRequest["startDatetime"] = startDatetime.value;
 		serviceRequest["serviceDuration"] = serviceDuration.value;
+		console.log(this.props.country.Code);
+		serviceRequest["serviceCountry"] = this.props.country.Code;
 
     searchForServices(serviceRequest);
   }

@@ -20,10 +20,10 @@ export default function () {
     return Agents.find(selector);
   });
 
-  Meteor.publish('matchmaker.codetable', function () {
-    const selector = {};
-    return CodeTable.find(selector);
-  });
+  // Meteor.publish('matchmaker.codetable', function () {
+  //   const selector = {};
+  //   return CodeTable.find(selector);
+  // });
 
   // Meteor.publish('matchmaker.servicetypes', function () {
   //   const selector = {Category: "ServiceType"};
