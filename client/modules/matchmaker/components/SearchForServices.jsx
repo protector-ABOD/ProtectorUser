@@ -8,6 +8,7 @@ class SearchForServices extends React.Component {
 		this.state = {price: 0};
 
 		this.handleServiceTypeChange = this.handleServiceTypeChange.bind(this);
+		this.handleTotalPriceChange = this.handleTotalPriceChange.bind(this);
   }
 
 	handleServiceTypeChange(event) {
@@ -15,6 +16,21 @@ class SearchForServices extends React.Component {
 		console.log(this.props.services);
 		const price = this.props.services.find(function (service) {
       return service.Code === event.target.value;
+    }).Price;
+		const totalPrice = ReactDOM.findDOMNode(this.refs.serviceDuration).value * price;
+		console.log(totalPrice);
+
+
+		this.setState({price: totalPrice});
+
+	    //this.setState({[e.target.name] : e.target.value});
+	}
+
+	handleTotalPriceChange(event) {
+		console.log(this.props.services);
+		const selectedServiceTypeCode = ReactDOM.findDOMNode(this.refs.serviceType).value;
+		const price = this.props.services.find(function (service) {
+      return service.Code === selectedServiceTypeCode;
     }).Price;
 		const totalPrice = ReactDOM.findDOMNode(this.refs.serviceDuration).value * price;
 		console.log(totalPrice);
@@ -52,7 +68,7 @@ class SearchForServices extends React.Component {
 								<div className="row pad-top-fixed-15">
                   Service Type:
 
-									<select className="form-control" ref="serviceType" onChange={this.handleServiceTypeChange.bind(this)}>
+									<select className="form-control" ref="serviceType" onChange={this.handleTotalPriceChange.bind(this)}>
 										<option value=''>Select...</option>
 						      {
 						        this.props.services.map(function(service) {
@@ -80,7 +96,7 @@ class SearchForServices extends React.Component {
 								</div>
                 <div className="row pad-top-fixed-15">
                   Duration:
-									<select className="form-control" ref="serviceDuration">
+									<select className="form-control" ref="serviceDuration" onChange={this.handleTotalPriceChange.bind(this)}>
 						      {
 						        this.props.serviceDurations.map(function(serviceDuration) {
 						            return <option key={serviceDuration.Description} value={serviceDuration.Value}>{serviceDuration.Description}</option>

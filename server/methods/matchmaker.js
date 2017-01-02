@@ -13,6 +13,7 @@ export default function () {
       Service_Request["Service_Start_Time"] = serviceRequest.startDatetime;
       Service_Request["Service_Duration_Value"] = serviceRequest.serviceDuration;
       Service_Request["Service_Country_Code"] = serviceRequest.serviceCountry;
+      Service_Request["Service_Per_Hour_Price"] = serviceRequest.servicePerHourPrice;
       Service_Request["Service_Total_Price"] = serviceRequest.serviceTotalPrice;
       const serviceRequestId = ServiceRequest.insert({
         User_ID: this.userId, //todo: change to use meteor logged in user
@@ -54,6 +55,8 @@ export default function () {
       const servicePricePerHour = servicePriceList.ValueList.find(function (service) {
         return service.Code === serviceRequest.serviceType;
       }).Price;
+      serviceRequest["servicePerHourPrice"] = servicePricePerHour;
+      
       const totalPrice = serviceRequest.serviceDuration * servicePricePerHour;
       serviceRequest["serviceTotalPrice"] = totalPrice;
 
