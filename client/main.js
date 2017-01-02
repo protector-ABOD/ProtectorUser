@@ -22,7 +22,7 @@ Tracker.autorun(function(){
 	var path = FlowRouter.current().path;
 	// we only do it if the user is in the login page
 	if(path === "/login"){
-	  //FlowRouter.go("/agent/home");
+	  FlowRouter.go("/services/search");
 	}
   }
   else{
@@ -30,3 +30,4 @@ Tracker.autorun(function(){
 	//console.log('b');
   }
 });
+Push.Configure(Meteor.settings.public.push_notification.gcm);

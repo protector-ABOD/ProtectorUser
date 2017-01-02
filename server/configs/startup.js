@@ -21,4 +21,14 @@ WebApp.rawConnectHandlers.use(function(req, res, next) {
   //if(facebookConfig) {
 	//configureFacebook(facebookConfig);
   //}
+
+  Push.Configure(Meteor.settings.server.push_notification);
+
+	//TODO: change who can send notification
+	Push.allow({
+		send: function(userId, notification) {
+		  // Allow all users to send to everybody - For test only!
+		  return true;
+		}
+	});
 }
