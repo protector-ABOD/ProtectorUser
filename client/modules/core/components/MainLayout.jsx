@@ -1,23 +1,63 @@
 import React from 'react';
+import SideMenu from '../containers/SideMenu.js' ;
 
-const Layout = ({content = () => null }) => (
-	<div>
-		<img src="/images/profile_line.jpg" id="profile-line" alt=""/>
+var Menu = require('react-burger-menu').push;
 
-		<div id="profile-nav">
 
-		<img id="profile_nav_img1" src="/images/profile_edit.png"/>
+const sideMenuStyle = {
+  cursor: 'pointer'
+};
 
-		<img id="profile_nav_img2" src="/images/profile_logo.png" />
+const profileLineStyle = {
+  'padding-top': '15px'
+};
 
-		<img id="profile_nav_img3" src="/images/profile_menu.png" />
+class Layout extends React.Component {
+	constructor(props, context) {
+		super(props, context);
+		this.state = { isSideMenuOpen: false }
 
-		</div>
-	  <div className="main-container">
-		
-		{content()}
-	  </div>
-    </div>
-);
+  }
+
+	handleClickSideMenu(state){
+		console.log(this.state.isSideMenuOpen);
+		if (!this.state.isSideMenuOpen) {
+			this.setState({isSideMenuOpen: true});
+		} else {
+			this.setState({isSideMenuOpen: false});
+		}
+	}
+
+
+	render() {
+		return (
+			<div id="outer-container">
+				<img src="/images/profile_line.jpg" id="profile-line" alt=""/>
+				<SideMenu isOpen={this.state.isSideMenuOpen} />
+				<div id="page-wrap">
+
+					<div id="profile-nav">
+
+
+						<img id="profile_nav_img3" src="/images/profile_menu.png" onClick={this.handleClickSideMenu.bind(this)} style={sideMenuStyle}/>
+
+						<img id="profile_nav_img2" src="/images/profile_logo.png" />
+
+
+					</div>
+
+
+				  <div className="main-container">
+
+					{this.props.content()}
+				  </div>
+				</div>
+		  </div>
+		)
+	}
+}
+
+
+
 
 export default Layout;
