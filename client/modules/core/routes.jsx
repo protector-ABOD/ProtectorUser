@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'react-mounter';
+import {mount} from 'react-mounter'; 
 
 import Layout from './components/MainLayout.jsx';
 import LoginLayout from './components/LoginLayout.jsx';
@@ -93,7 +93,7 @@ export default function (injectDeps, {FlowRouter}) {
   privateRoutes.route('/services/search', {
     name: 'services.search',
     action() {
-      mount(LoginLayoutCtx, {
+      mount(MainLayoutCtx, {
         content: () => (<SearchForServices />)
       });
     }
@@ -102,7 +102,7 @@ export default function (injectDeps, {FlowRouter}) {
   privateRoutes.route('/services/agent-listing', {
     name: 'services.agent-listing',
     action({_id}) {
-      mount(LoginLayoutCtx, {
+      mount(MainLayoutCtx, {
         content: () => (<AgentList />)
       });
     }

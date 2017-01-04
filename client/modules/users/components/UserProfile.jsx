@@ -21,7 +21,7 @@ class UserProfile extends React.Component {
 						<div className="form-group">
 							<label htmlFor="NRIC">IC Number</label>
 							<input type="text" className="form-control" id="NRIC" ref="NRIC" defaultValue={userprofile.NRIC}/>
-						</div>
+						</div>   
 						<div className="form-group">
 							<label htmlFor="contactNumber">Contact Number</label>
 							<input type="text" className="form-control" id="contactNumber" ref="contactNumber" defaultValue={userprofile.Contact_Number}/>

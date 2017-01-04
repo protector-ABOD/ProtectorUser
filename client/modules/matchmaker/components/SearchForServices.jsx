@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Template} from 'meteor/templating';
+import {Blaze} from 'meteor/blaze';
 
 class SearchForServices extends React.Component {
 
@@ -27,12 +29,7 @@ class SearchForServices extends React.Component {
 		const {error} = this.props;
 
 		return (
-			<div className="content-container login-body-container align-middle">
-				<div className="row pad-top-percent-5">
-					<div className="col-xs-12">
-						<img id="login-logo" src="/images/Protect_Logo.png" alt="" />
-					</div>
-				</div>
+			<div className="content-container align-middle">
 				<div className="row">
 					<div className="col-xs-12 pad-all-20">
 						<div className="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
@@ -46,7 +43,8 @@ class SearchForServices extends React.Component {
 									<select className="form-control" ref="serviceType" onChange={this.handleServiceTypeChange.bind(this)}>
 						      {
 						        this.props.services.map(function(service) {
-						            return <option key={service.Description} price={service.Price} value={service.Code}>{service.Description}</option>
+						            //return <option key={service.Description} price={service.Price} value={service.Code}>{service.Description}</option>
+						            return <option key={service.Description} value={service.Code}>{service.Description}</option>
 						        })
 						      }
 						      </select>
