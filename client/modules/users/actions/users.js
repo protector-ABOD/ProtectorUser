@@ -44,7 +44,7 @@ export default {
   			console.log(err);
   		}
   		else{
-  			FlowRouter.go('/user/home')
+  			FlowRouter.go('/services/search')
   		}
   	});
   }

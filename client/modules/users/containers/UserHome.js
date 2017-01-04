@@ -7,10 +7,13 @@ export const composer = ({context}, onData) => {
   if (Meteor.subscribe('userprofile.existingUser', Meteor.userId()).ready()) {
     const userprofile = Collections.UserProfile.findOne({User_ID: Meteor.userId()});
 
-    if(!userprofile){
+    if(!userprofile || userprofile.Full_Name.trim() === ""){
       Meteor.call('users.createProfile', Meteor.userId());
       FlowRouter.go("/user/profile");
-    };
+    }
+    else{
+      FlowRouter.go("/services/search");
+    }
     onData(null, {userprofile});
   }
 };

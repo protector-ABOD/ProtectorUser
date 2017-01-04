@@ -50,6 +50,7 @@ export default class AgentSummary extends Component {
 			<div class="row">
 				<a href="#" onClick={this.handleClickAgentSummary.bind(this)}>
 					{this.props.agent.FullName}
+
 					<AgentDetailsPopup isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
 						<h3>Agent Details</h3>
 						<p>{this.props.agent.FullName}</p>
