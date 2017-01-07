@@ -5,9 +5,6 @@ export const composer = ({context, clearErrors}, onData) => {
   const {Meteor, Collections} = context();
   if (Session.get("ServiceRequest")){
     Meteor.call('matchmaker.searchForMatchingAgents', Session.get("ServiceRequest"), (err, agentList) => {
-      const singleAgent = agentList[0];
-      console.log(singleAgent);
-
       onData(null, {agentList});
 
     });

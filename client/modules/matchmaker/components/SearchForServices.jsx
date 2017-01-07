@@ -1,16 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Template} from 'meteor/templating';
-import {Blaze} from 'meteor/blaze';
+import DatePicker from 'react-datepicker';
+import Moment from 'moment';
+require('./datepicker.css');
 
 class SearchForServices extends React.Component {
 
 	constructor(props, context) {
 		super(props, context);
-		this.state = {price: 0};
+		console.log(Moment());
+		this.state = {price: 0, startDate: Moment()};
 
 		this.handleServiceTypeChange = this.handleServiceTypeChange.bind(this);
 		this.handleTotalPriceChange = this.handleTotalPriceChange.bind(this);
+		this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
+  }
+
+	handleDatePickerChange(date) {
+		console.log(date);
+    this.setState({
+      startDate: date
+    });
   }
 
 	handleServiceTypeChange(event) {
@@ -52,6 +62,16 @@ class SearchForServices extends React.Component {
 
 	render() {
 		const {error} = this.props;
+		var optionHours = [];
+		for (var i = 1; i <= 12; i++) {
+		  optionHours.push(<option key={i} value={i}>{i}</option>);
+		}
+		var optionMinutes = [];
+		optionMinutes.push(<option key="0" value="0">00</option>);
+	  optionMinutes.push(<option key="30" value="30">30</option>);
+		var optionAmPm = [];
+		optionAmPm.push(<option key="AM" value="AM">AM</option>);
+	  optionAmPm.push(<option key="PM" value="PM">PM</option>);
 
 		return (
 			<div className="content-container align-middle">
@@ -66,7 +86,7 @@ class SearchForServices extends React.Component {
                   Service Type:
 
 									<select className="form-control" ref="serviceType" onChange={this.handleTotalPriceChange.bind(this)}>
-										<option value=''>Select...</option>
+										<option value="undefined">Select...</option>
 						      {
 						        this.props.services.map(function(service) {
 						            //return <option key={service.Description} price={service.Price} value={service.Code}>{service.Description}</option>
@@ -89,8 +109,22 @@ class SearchForServices extends React.Component {
 									{/*<input type="text" className="form-control" id="location" ref="location"/>*/}
 								</div>
                 <div className="row pad-top-fixed-15">
-                  Start DateTime:
-									<input type="datetime-local" className="form-control" id="startDatetime" min={this.getISOStringWithoutSecsAndMillisecs1(new Date())} ref="startDatetime"/>
+                  Date: <br />
+									<DatePicker selected={this.state.startDate} minDate={Moment()} onChange={this.handleDatePickerChange.bind(this)} className="form-control" ref="startDate" />
+								</div>
+								<div className="row pad-top-fixed-15">
+                  Time:
+									<div className="timepicker">
+										<select className="form-control col-xs-4" ref="startHour" defaultValue={Moment().format("h")}>
+											{optionHours}
+							      </select>
+										<select className="form-control col-xs-4" ref="startMinutes" defaultValue="30">
+							      	{optionMinutes}
+							      </select>
+										<select className="form-control col-xs-4" ref="startAmPm" defaultValue={Moment().format("A")}>
+							      	{optionAmPm}
+							      </select>
+									</div>
 								</div>
                 <div className="row pad-top-fixed-15">
                   Duration:
@@ -126,14 +160,17 @@ class SearchForServices extends React.Component {
     }
 
     const {searchForServices} = this.props;
-    const {serviceType, serviceLocation, startDatetime, serviceDuration} = this.refs;
+    const {serviceType, serviceLocation, startDate, startHour, startMinutes, startAmPm, serviceDuration} = this.refs;
 
 		var serviceRequest = {};
 		serviceRequest["serviceType"] = serviceType.value;
 		serviceRequest["serviceLocation"] = serviceLocation.value;
-		serviceRequest["startDatetime"] = startDatetime.value;
+
+		const computedHour = startAmPm.value == "AM" ? startHour.value : +startHour.value + 12;
+		console.log(computedHour);
+		serviceRequest["startDateTime"] = this.state.startDate.startOf('day').add(computedHour, 'h').add(startMinutes.value, 'm').toDate();
+
 		serviceRequest["serviceDuration"] = serviceDuration.value;
-		console.log(this.props.country.Code);
 		serviceRequest["serviceCountry"] = this.props.country.Code;
 
     searchForServices(serviceRequest);
