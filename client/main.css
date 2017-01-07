@@ -5415,3 +5415,35 @@ header.title {
 	}
 
 }
+
+.agent-summary {
+  padding: 5px 0 5px 0;
+	background-color: #f9f9f9;
+	text-align: initial;
+	border-radius: 20px;
+	box-shadow: -1px 2px 2px 3px #fec524;
+	display: flex;
+	margin: 10px auto 15px auto;
+	max-width: 440px;
+	cursor: pointer;
+}
+
+.agent-image {
+  padding: 0 0 0 5px;
+}
+
+.agent-image > img {
+	border-radius: 50%;
+  border-style: solid;
+  border-width: 2.5px;
+  width: 100%;
+}
+
+.agent-details {
+	align-items: stretch;
+  padding: 18px;
+  color: #101010;
+}
+.agent-details > .agent-description {
+	font-size: 11px;
+}

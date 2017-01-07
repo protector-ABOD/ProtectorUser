@@ -47,9 +47,20 @@ export default class AgentSummary extends Component {
 	render() {
 		// Just render a placeholder container that will be filled in
 		return (
-			<div class="row">
-				<a href="#" onClick={this.handleClickAgentSummary.bind(this)}>
+			<div className="row agent-summary" onClick={this.handleClickAgentSummary.bind(this)}>
+				<div className="agent-image col-xs-3">
+					<img src="/images/agent-placeholder.png"/>
+				</div>
+				<div className ="agent-details col-xs-9">
 					{this.props.agent.FullName}
+					<div class="rating">
+						<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+					</div>
+					<span className="agent-description">
+						20 years on the field experience.
+					</span>
+				</div>
+
 
 					<AgentDetailsPopup isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
 						<h3>Agent Details</h3>
@@ -60,7 +71,6 @@ export default class AgentSummary extends Component {
 						<p>{this.props.agent._id.toString()}</p>
 						<p><button onClick={this.requestForAgent.bind(this)}>Request</button><button onClick={() => this.closeModal()}>Close</button></p>
 					</AgentDetailsPopup>
-				</a>
 			</div>
 			// <div id="login-body-container">
 			// 	<ul>
