@@ -345,4 +345,6 @@
 
 .react-datepicker__tether-element {
   z-index: 2147483647;
+  width: initial;
+  height: initial;
 }
