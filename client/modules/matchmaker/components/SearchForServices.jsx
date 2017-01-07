@@ -8,10 +8,8 @@ class SearchForServices extends React.Component {
 
 	constructor(props, context) {
 		super(props, context);
-		console.log(Moment());
 		this.state = {price: 0, startDate: Moment()};
 
-		this.handleServiceTypeChange = this.handleServiceTypeChange.bind(this);
 		this.handleTotalPriceChange = this.handleTotalPriceChange.bind(this);
 		this.handleDatePickerChange = this.handleDatePickerChange.bind(this);
   }
@@ -23,48 +21,30 @@ class SearchForServices extends React.Component {
     });
   }
 
-	handleServiceTypeChange(event) {
-		console.log(event.target);
-		console.log(this.props.services);
-		const price = this.props.services.find(function (service) {
-      return service.Code === event.target.value;
-    }).Price;
-		const totalPrice = ReactDOM.findDOMNode(this.refs.serviceDuration).value * price;
-		console.log(totalPrice);
-
-
-		this.setState({price: totalPrice});
-
-	    //this.setState({[e.target.name] : e.target.value});
-	}
-
 	handleTotalPriceChange(event) {
-		console.log(this.props.services);
 		const selectedServiceTypeCode = ReactDOM.findDOMNode(this.refs.serviceType).value;
-		const price = this.props.services.find(function (service) {
-      return service.Code === selectedServiceTypeCode;
-    }).Price;
-		const totalPrice = ReactDOM.findDOMNode(this.refs.serviceDuration).value * price;
-		console.log(totalPrice);
-
-
-		this.setState({price: totalPrice});
-
-	    //this.setState({[e.target.name] : e.target.value});
-	}
-
-	getISOStringWithoutSecsAndMillisecs1(date) {
-	  const dateAndTime = date.toISOString().split('T')
-	  const time = dateAndTime[1].split(':')
-
-	  return dateAndTime[0]+'T'+time[0]+':'+time[1]
+		const selectedDurationValue = ReactDOM.findDOMNode(this.refs.serviceDuration).value;
+		if (selectedServiceTypeCode && selectedDurationValue)
+		{
+			const service = this.props.services.find(function (service) {
+	      return service.Code === selectedServiceTypeCode;
+	    });
+			const totalPrice =  selectedDurationValue * service.Price;
+			this.setState({price: totalPrice});
+		} else {
+			this.setState({price: 0});
+		}
 	}
 
 	render() {
 		const {error} = this.props;
 		var optionHours = [];
 		for (var i = 1; i <= 12; i++) {
-		  optionHours.push(<option key={i} value={i}>{i}</option>);
+			if (i == 12) {
+				optionHours.push(<option key={i} value="0">{i}</option>);
+			} else {
+				optionHours.push(<option key={i} value={i}>{i}</option>);
+			}
 		}
 		var optionMinutes = [];
 		optionMinutes.push(<option key="0" value="0">00</option>);
@@ -76,44 +56,45 @@ class SearchForServices extends React.Component {
 		return (
 			<div className="content-container align-middle">
 				<div className="row">
-					<div className="col-xs-12 pad-all-20">
-						<div className="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
+					<header className="title"> Search For Services </header>
+				</div>
+				<div className="row">
+					<div className="col-xs-12">
+						<div className="col-xs-offset-2 col-sm-offset-3 col-sm-6 col-xs-8 col-md-offset-4 col-md-4">
 							{error ? <span className="text-error">{error}</span> : <span>&nbsp;</span>}
 						</div>
-						<div className='col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2 active-form'>
+						<div className='col-xs-offset-2 col-xs-8 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4 active-form'>
 							<form onSubmit={this.searchForServices.bind(this)}>
 								<div className="row pad-top-fixed-15">
-                  Service Type:
-
-									<select className="form-control" ref="serviceType" onChange={this.handleTotalPriceChange.bind(this)}>
-										<option value="undefined">Select...</option>
-						      {
-						        this.props.services.map(function(service) {
-						            //return <option key={service.Description} price={service.Price} value={service.Code}>{service.Description}</option>
-						            return <option key={service.Description} value={service.Code}>{service.Description}</option>
-						        })
-						      }
+									<select required className="form-control form-control-icon" ref="serviceType" onChange={this.handleTotalPriceChange.bind(this)}>
+										<option selected="selected" disabled value="">Select a Service</option>
+							      {
+							        this.props.services.map(function(service) {
+							            //return <option key={service.Description} price={service.Price} value={service.Code}>{service.Description}</option>
+							            return <option key={service.Description} value={service.Code}>{service.Description}</option>
+							        })
+							      }
 						      </select>
+									<span className="form-control-icon fa fa-briefcase"></span>
 
 									{/*<input type="text" className="form-control" id="serviceType" ref="serviceType"/>*/}
 								</div>
 								<div className="row pad-top-fixed-15">
-                  State (Location):
-									<select className="form-control" ref="serviceLocation">
-						      {
-						        this.props.states.map(function(state) {
-						            return <option key={state.Description} value={state.Code}>{state.Description}</option>
-						        })
-						      }
+									<select required className="form-control form-control-icon" ref="serviceLocation">
+										<option selected="selected" disabled value="">Location</option>
+							      {
+							        this.props.states.map(function(state) {
+							            return <option key={state.Description} value={state.Code}>{state.Description}</option>
+							        })
+							      }
 						      </select>
-									{/*<input type="text" className="form-control" id="location" ref="location"/>*/}
+									<span className="form-control-icon fa fa-map-marker fa-lg"></span>
 								</div>
                 <div className="row pad-top-fixed-15">
-                  Date: <br />
-									<DatePicker selected={this.state.startDate} minDate={Moment()} onChange={this.handleDatePickerChange.bind(this)} className="form-control" ref="startDate" />
+									<DatePicker selected={this.state.startDate} minDate={Moment()} onChange={this.handleDatePickerChange.bind(this)} className="form-control form-control-icon" ref="startDate" />
+									<span className="form-control-icon fa fa-calendar"></span>
 								</div>
 								<div className="row pad-top-fixed-15">
-                  Time:
 									<div className="timepicker">
 										<select className="form-control col-xs-4" ref="startHour" defaultValue={Moment().format("h")}>
 											{optionHours}
@@ -127,22 +108,23 @@ class SearchForServices extends React.Component {
 									</div>
 								</div>
                 <div className="row pad-top-fixed-15">
-                  Duration:
-									<select className="form-control" ref="serviceDuration" onChange={this.handleTotalPriceChange.bind(this)}>
-						      {
-						        this.props.serviceDurations.map(function(serviceDuration) {
-						            return <option key={serviceDuration.Description} value={serviceDuration.Value}>{serviceDuration.Description}</option>
-						        })
-						      }
+									<select required className="form-control form-control-icon" ref="serviceDuration" onChange={this.handleTotalPriceChange.bind(this)}>
+										<option selected="selected" disabled value="">Duration</option>
+							      {
+							        this.props.serviceDurations.map(function(serviceDuration) {
+							            return <option key={serviceDuration.Description} value={serviceDuration.Value}>{serviceDuration.Description}</option>
+							        })
+							      }
 						      </select>
-									{/*<input type="number" className="form-control" id="duration" ref="duration"/>*/}
+									<span className="form-control-icon fa fa-clock-o fa-lg"></span>
 								</div>
 								<div className="row pad-top-fixed-15">
-                  Price: <p>{CURRENT_CURRENCY + " " + this.state.price}</p>
-									{/*<input type="number" className="form-control" id="duration" ref="duration"/>*/}
+									<span className="pull-left">Estimated Charges:</span> <br />
+                  <span className="pull-left currency">{CURRENT_CURRENCY}</span>
+									<p className="pull-right price">{this.state.price}</p>
 								</div>
 								<div className="row pad-top-fixed-15">
-									<button type="submit" className="btn btn-success btn-100">Search For Services</button>
+									<button type="submit" className="btn btn-success btn-100">Search</button>
 								</div>
 							</form>
 						</div>
@@ -167,7 +149,6 @@ class SearchForServices extends React.Component {
 		serviceRequest["serviceLocation"] = serviceLocation.value;
 
 		const computedHour = startAmPm.value == "AM" ? startHour.value : +startHour.value + 12;
-		console.log(computedHour);
 		serviceRequest["startDateTime"] = this.state.startDate.startOf('day').add(computedHour, 'h').add(startMinutes.value, 'm').toDate();
 
 		serviceRequest["serviceDuration"] = serviceDuration.value;
