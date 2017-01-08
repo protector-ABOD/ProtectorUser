@@ -19,8 +19,9 @@ class Layout extends React.Component {
 
   }
 
+
 	handleClickSideMenu(state){
-		console.log(this.state.isSideMenuOpen);
+		// console.log(this.state.isSideMenuOpen);
 		if (!this.state.isSideMenuOpen) {
 			this.setState({isSideMenuOpen: true});
 		} else {
@@ -28,6 +29,13 @@ class Layout extends React.Component {
 		}
 	}
 
+  componentWillReceiveProps(nextProps) {
+    //close side menu when page changes.
+    JSON.stringify(this.props.content()) !== JSON.stringify(nextProps.content())
+    {
+      this.setState({isSideMenuOpen: false});
+    }
+  }
 
 	render() {
 		return (
