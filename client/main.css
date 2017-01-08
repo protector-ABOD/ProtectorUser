@@ -5348,27 +5348,21 @@ button.close {
   border-style: solid;
   border-width: 5px;
   width: 175px;
-  position: absolute;
-  margin: 30px auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  display: block;
+  margin: 0px auto;
 }
 
 .portrait-container{
-  height: 280px;
   background-color: #061b2b;
+	padding: 10px 10px;
+  text-align: center;
 }
 
 .portrait-container > span {
-  text-align: center;
-  width: 100%;
-  position: absolute;
   font-size: 30px;
-  color: #101010;
-  margin-top: 220px;
   color: #f9f9f9;
+	line-height: 45px;
 }
 
 .timepicker {
