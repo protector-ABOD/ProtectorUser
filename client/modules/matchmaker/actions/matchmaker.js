@@ -24,5 +24,11 @@ export default {
         return LocalState.set('ERROR', err.message);
       }
     })
+  },
+  navigationAfterConfirm({Meteor, LocalState}) {
+    //
+    console.log("redirected to services/requests");
+    //temporarily redirect to search, services/requests not ready
+    FlowRouter.go('/services/search');
   }
 };

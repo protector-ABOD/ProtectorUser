@@ -8,6 +8,7 @@ export const composer = ({context, clearErrors}, onData) => {
 
 export const depsMapper = (context, actions) => ({
   requestForAgent: actions.matchmaker.requestForAgent,
+  navigationAfterConfirm: actions.matchmaker.navigationAfterConfirm,
   context: () => context
 });
 

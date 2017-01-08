@@ -96,7 +96,7 @@ class SearchForServices extends React.Component {
 								</div>
 								<div className="row pad-top-fixed-15">
 									<div className="timepicker">
-										<select className="form-control col-xs-4" ref="startHour" defaultValue={Moment().format("h")}>
+										<select className="form-control col-xs-4" ref="startHour" defaultValue={Moment().format("h") !== "12" ? Moment().format("h") : "0"}>
 											{optionHours}
 							      </select>
 										<select className="form-control col-xs-4" ref="startMinutes" defaultValue="30">
@@ -149,7 +149,7 @@ class SearchForServices extends React.Component {
 		serviceRequest["serviceLocation"] = serviceLocation.value;
 
 		const computedHour = startAmPm.value == "AM" ? startHour.value : +startHour.value + 12;
-		serviceRequest["startDateTime"] = this.state.startDate.startOf('day').add(computedHour, 'h').add(startMinutes.value, 'm').toDate();
+		serviceRequest["startDatetime"] = this.state.startDate.startOf('day').add(computedHour, 'h').add(startMinutes.value, 'm').toDate();
 
 		serviceRequest["serviceDuration"] = serviceDuration.value;
 		serviceRequest["serviceCountry"] = this.props.country.Code;
