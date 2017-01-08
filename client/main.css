@@ -5423,7 +5423,7 @@ header.title {
 }
 
 .agent-summary:hover {
-	box-shadow: -2px 3px 4px 4px #fec524
+	box-shadow: -2px 3px 2px 3px #fec524;
 }
 
 .agent-image {

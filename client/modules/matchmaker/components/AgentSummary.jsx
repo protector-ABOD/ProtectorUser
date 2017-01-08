@@ -99,13 +99,33 @@ export default class AgentSummary extends Component {
           contentLabel="Agent Details"
 					className="ReactModal__Content"
         >
+					<div className="row">
+						<div className="agent-image col-xs-3">
+							<img src="/images/agent-placeholder.png"/>
+						</div>
+						<div className ="agent-details col-xs-9">
+							{this.props.agent.FullName}
+							<div class="rating">
+								<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+							</div>
+						</div>
+					</div>
+					<div className="row">
+						<span className="pull-left"> Protected: </span>
+						<span className="pull-right"> 250 people </span>
+						<div style={{clear: 'both'}}></div>
+					</div>
+					<div className="row">
+						<span className="pull-left"> Last Active: </span>
+						<span className="pull-right"> Yesterday </span>
+						<div style={{clear: 'both'}}></div>
+					</div>
+					<div className="row" style={{height: '150px'}}>
 
-					<h3>Agent Details</h3>
-					<p>{this.props.agent.FullName}</p>
-					<p>Rating: 5 Stars</p>
-					<p>Protected:  number of customers</p>
-					<p>Last Active:  last active datetime</p>
-					<p><button className="btn btn-success btn-100" onClick={this.handleClickAgentRequest.bind(this)}>Request</button></p>
+					</div>
+					<div className="row">
+						<p><button className="btn btn-primary btn-100" onClick={this.handleClickAgentRequest.bind(this)}>Request</button></p>
+					</div>
         </Modal>
 
 				{/* Modal For confirmation Popup*/}
@@ -116,10 +136,12 @@ export default class AgentSummary extends Component {
           contentLabel="Confirmation"
 					className="ReactModal__Content"
         >
-
-					<h3>Confirmation</h3>
-					<p>Your request for Closed Protection Services Armed has been submitted to the Protector Agent. Your credit card will be charged RM1000 upon the request is accepted.</p>
-					<p><button className="btn btn-success btn-100" onClick={this.handleClickConfirmButton.bind(this)}>Okay</button></p>
+					<div className="row">
+						<h3>Confirmation</h3>
+						<p>Your request for Closed Protection Services Armed has been submitted to the Protector Agent. </p>
+						<p>Your credit card will be charged RM1000 upon the request is accepted.</p>
+						<p><button className="btn btn-primary btn-100" onClick={this.handleClickConfirmButton.bind(this)}>Okay</button></p>
+					</div>
         </Modal>
 			</div>
 			// <div id="login-body-container">
