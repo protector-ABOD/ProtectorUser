@@ -17,12 +17,17 @@ class AgentList extends React.Component {
 	render() {
 		// Just render a placeholder container that will be filled in
 		return (
-
-			<div id="login-body-container">
-				List of agents will be displayed here
-				<ul>
-					{this.renderAgents()}
-			 </ul>
+			<div className="content-container align-middle">
+				<div className="row">
+					<header className="title"> Result </header>
+				</div>
+				<div className="row">
+					<div className="col-xs-12 pad-all-20">
+						<div className="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-4 col-md-4">
+							{this.renderAgents()}
+						</div>
+					</div>
+				</div>
 			</div>
 		)
 	}

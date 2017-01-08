@@ -13,8 +13,6 @@ const profileLineStyle = {
 class SideMenu extends React.Component {
 	constructor(props, context) {
 		super(props, context);
-		this.state = { isSideMenuOpen: false }
-
   }
 
 	render() {

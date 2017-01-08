@@ -194,7 +194,7 @@ p.login-copyright-text {
 
 #profile-nav {
 	width:100%;
-	float:right;
+	/*float:right;*/
 	text-align:center;
 	vertical-align: middle;
 }
@@ -207,7 +207,7 @@ p.login-copyright-text {
 }
 
 #profile_nav_img3 {
-	margin-left:30px;
+	margin-left:-30px;
 }
 
 
@@ -2119,6 +2119,9 @@ output {
   -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.form-control.form-control-icon {
+	padding-left: 25px;
 }
 .form-control:focus {
   border-color: #66afe9;
@@ -5345,25 +5348,100 @@ button.close {
   border-style: solid;
   border-width: 5px;
   width: 175px;
-  position: absolute;
-  margin: 30px auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  display: block;
+  margin: 0px auto;
 }
 
 .portrait-container{
-  height: 280px;
   background-color: #061b2b;
+	padding: 10px 10px;
+  text-align: center;
 }
 
 .portrait-container > span {
-  text-align: center;
-  width: 100%;
-  position: absolute;
   font-size: 30px;
-  color: #101010;
-  margin-top: 220px;
   color: #f9f9f9;
+	line-height: 45px;
+}
+
+.timepicker {
+	width: 100%;
+}
+
+.timepicker > select {
+	display: inline-block;
+	width: 33%;
+	width: calc(100% / 3);
+}
+
+span.form-control-icon{
+    float: left;
+    margin-left: 7.5px;
+    margin-top: -25px;
+    position: relative;
+    z-index: 2;
+		color: #101010;
+}
+
+header.title {
+	font-size: 25px;
+	font-size: 6vmin;
+}
+
+.currency {
+	font-size: 36px;
+}
+
+.price {
+	font-size: 36px;
+	padding: 0px 10px 0px 0px;
+}
+
+@media (min-width: 550px) {
+	.currency {
+		font-size: 50px;
+	}
+
+	.price {
+		margin-top: -20px;
+		font-size: 67px;
+	}
+
+}
+
+.agent-summary {
+  padding: 5px 0 5px 0;
+	background-color: #f9f9f9;
+	text-align: initial;
+	border-radius: 5px;
+	box-shadow: -1px 2px 2px 3px #fec524;
+	display: flex;
+	margin: 10px auto 15px auto;
+	max-width: 440px;
+	cursor: pointer;
+}
+
+.agent-summary:hover {
+	box-shadow: -2px 3px 2px 3px #fec524;
+}
+
+.agent-image {
+  padding: 0 0 0 5px;
+}
+
+.agent-image > img {
+	border-radius: 50%;
+  border-style: solid;
+  border-width: 2.5px;
+  width: 100%;
+}
+
+.agent-details {
+	align-items: stretch;
+  padding: 18px;
+  color: #101010;
+}
+.agent-details > .agent-description {
+	font-size: 11px;
 }
