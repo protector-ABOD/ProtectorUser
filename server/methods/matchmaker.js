@@ -1,4 +1,4 @@
-import {Agents, ServiceRequest, CodeTable} from '/lib/collections';
+import {Agents, ServiceRequest, CodeTable, UserProfile} from '/lib/collections';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
@@ -46,7 +46,8 @@ export default function () {
       return agents;
 
     },
-    'matchmaker.requestForAgent'(serviceRequest, agent) {
+    'matchmaker.requestForAgent'(serviceRequest, agent, userId) {
+      check(userId, String);
       check(serviceRequest, Object);
       check(agent, Object);
 
@@ -63,7 +64,22 @@ export default function () {
       //insert request document with agentId
       const serviceRequestId = Meteor.call("matchmaker.storeUsersRequestIntoDB", serviceRequest, agent);
 
-      //trigger notification to agent
+	  //find user profile to get the name
+	  const userProfile = UserProfile.findOne({ User_ID : userId});
+
+	  //if user profile is found, push notification to agent
+	  if (userProfile) {	
+		Push.send({
+			from: 'push',
+			title: 'New Request',
+			text: userProfile.Full_Name + ' has requested for your service.',
+			badge: 1,
+			query: {userId : serviceRequest.Agent_ID},
+			payload: {
+				title: 'New Request'
+			}
+		});
+	  }
     },
   });
 }
