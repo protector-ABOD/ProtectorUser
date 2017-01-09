@@ -16,7 +16,7 @@ export default function () {
       Service_Request["Service_Per_Hour_Price"] = serviceRequest.servicePerHourPrice;
       Service_Request["Service_Total_Price"] = serviceRequest.serviceTotalPrice;
       const serviceRequestId = ServiceRequest.insert({
-        User_ID: this.userId, //todo: change to use meteor logged in user
+        User_ID: this.userId,
         Agent_ID: agent._id,
         Service_Request: Service_Request,
         Service_Request_Status: "Pending",
@@ -57,7 +57,7 @@ export default function () {
         return service.Code === serviceRequest.serviceType;
       }).Price;
       serviceRequest["servicePerHourPrice"] = servicePricePerHour;
-      
+
       const totalPrice = serviceRequest.serviceDuration * servicePricePerHour;
       serviceRequest["serviceTotalPrice"] = totalPrice;
 
