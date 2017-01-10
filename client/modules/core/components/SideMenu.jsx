@@ -24,7 +24,7 @@ class SideMenu extends React.Component {
 							<span>{this.props.userprofile.Full_Name}</span>
 						</div>
 						<a id="payment-info" className="menu-item" href="/"><i className="fa fa-fw fa-credit-card-alt" /><span>Payment Info</span></a>
-						<a id="requests" className="menu-item" href="/"><i className="fa fa-fw fa-clock-o" /><span>Requests</span></a>
+						<a id="requests" className="menu-item" href="/requests"><i className="fa fa-fw fa-clock-o" /><span>Requests</span></a>
 						<a id="favourite" className="menu-item" href="/"><i className="fa fa-fw fa-star" /><span>Favorite</span></a>
 						<a id="scheduled" className="menu-item" href="/"><i className="fa fa-fw fa-calendar" /><span>Scheduled</span></a>
 						<a id="notification" className="menu-item" href="/"><i className="fa fa-fw fa-bell" /><span>Notication</span></a>

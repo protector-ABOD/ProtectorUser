@@ -26,9 +26,8 @@ export default {
     })
   },
   navigationAfterConfirm({Meteor, LocalState}) {
-    //
-    console.log("redirected to services/requests");
+
     //temporarily redirect to search, services/requests not ready
-    FlowRouter.go('/services/search');
+    FlowRouter.go('/requests');
   }
 };
