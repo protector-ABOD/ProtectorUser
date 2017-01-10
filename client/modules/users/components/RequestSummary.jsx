@@ -16,7 +16,6 @@ const customStyles = {
   }
 };
 
-
 // Agent Summary component - represents a single Agent list item
 export default class RequestSummary extends Component {
 	constructor(props) {
@@ -25,8 +24,6 @@ export default class RequestSummary extends Component {
 		this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
-
-
 
 	handleClickCompletedRequest(event){
 		if (!this.state.modalIsOpen) {
@@ -38,10 +35,10 @@ export default class RequestSummary extends Component {
     this.setState({modalIsOpen: true});
   }
 
+
   closeModal() {
 		this.setState({modalIsOpen: false});
   }
-
 
   dateToString(date) {
     return date.toString();
@@ -138,7 +135,6 @@ export default class RequestSummary extends Component {
 				</div>
 		 )
 		}
-
 	}
 }
 
