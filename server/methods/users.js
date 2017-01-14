@@ -1,4 +1,4 @@
-import {UserProfile} from '/lib/collections';
+import {UserProfile, ServiceRequest} from '/lib/collections';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
@@ -8,7 +8,7 @@ export default function () {
         check(userProfile, Object);
         check(userId, String);
         const createdAt = new Date();
-      	
+
 	  	UserProfile.upsert({User_ID: userId}, {
 	  		User_ID : userId,
 	        Full_Name : userProfile.fullName,
@@ -47,6 +47,48 @@ export default function () {
 			Last_Edited_DateTime: createdAt,
 			Last_Edited_By: userId
     	})
+    },
+    'users.getServiceRequests'() {
+      var selector = {User_ID: this.userId};
+      //return list of service requests under user
+      // const serviceRequests = ServiceRequest.find(selector).fetch();
+      const serviceRequests = ServiceRequest.aggregate([
+        {
+          $lookup:
+            {
+              from: "Agent",
+              localField: "Agent_ID",
+              foreignField: "_id",
+              as: "Agent"
+            }
+        },
+        {
+          $match:
+            {
+              User_ID: this.userId
+            }
+        }
+      ]);
+      return serviceRequests;
+    },
+    'users.rateAgent'(serviceRequestId, rating, comment) {
+      check(serviceRequestId, Meteor.Collection.ObjectID);
+      check(rating, Number);
+      check(comment, String);
+
+      const selector = {
+        User_ID: this.userId,
+        _id: serviceRequestId
+      }
+
+      const setter = {
+        $set: {
+          Comment_By_User: comment,
+          Rating_By_User: rating
+        }
+      }
+
+      ServiceRequest.update(selector, setter);
     }
 
   });

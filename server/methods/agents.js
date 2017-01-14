@@ -74,6 +74,14 @@ export default function () {
       };
 
       Agents.insert(agentToInsert);
+    },
+    'agent.getDetails'(agentId) {
+      check(agentId, Meteor.Collection.ObjectID)
+      var selector = {_id: agentId};
+      //return list of service requests under user
+      const agent = Agents.find(selector).fetch();
+      console.log(agent[0].FullName);
+      return agent;
     }
   });
 }

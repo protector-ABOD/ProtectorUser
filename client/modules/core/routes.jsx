@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'react-mounter'; 
+import {mount} from 'react-mounter';
 
 import Layout from './components/MainLayout.jsx';
 import LoginLayout from './components/LoginLayout.jsx';
@@ -7,6 +7,7 @@ import Home from './components/Home.jsx';
 import Login from '../users/containers/Login.js';
 import SearchForServices from '../matchmaker/containers/SearchForServices.js';
 import AgentList from '../matchmaker/containers/AgentList.js';
+import RequestList from '../users/containers/RequestList.js';
 import UserHome from '../users/containers/UserHome.js';
 import UserProfile from '../users/containers/UserProfile.js'
 
@@ -104,6 +105,15 @@ export default function (injectDeps, {FlowRouter}) {
     action({_id}) {
       mount(MainLayoutCtx, {
         content: () => (<AgentList />)
+      });
+    }
+  });
+
+  privateRoutes.route('/requests', {
+    name: 'requests',
+    action({_id}) {
+      mount(MainLayoutCtx, {
+        content: () => (<RequestList />)
       });
     }
   });

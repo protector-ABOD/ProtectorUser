@@ -3,14 +3,18 @@ import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
 export const composer = ({context, clearErrors}, onData) => {
   const {Meteor, Collections} = context();
-  if (Session.get("ServiceRequest")){
-    Meteor.call('matchmaker.searchForMatchingAgents', Session.get("ServiceRequest"), (err, agentList) => {
-      onData(null, {agentList});
 
-    });
-  } else {
+  //checking
+  if (!Session.get("ServiceRequest")) {
     FlowRouter.go('/services/search');
   }
+  //search agents
+  if (Session.get("ServiceRequest")){
+    Meteor.call('matchmaker.searchForMatchingAgents', Session.get("ServiceRequest"), (err, agentList) => {
+      onData(null, {agentList}, Session.get("ServiceRequest")._id);
+    });
+  }
+
 };
 
 export const depsMapper = (context, actions) => ({

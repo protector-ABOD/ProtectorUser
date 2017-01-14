@@ -5380,7 +5380,7 @@ span.form-control-icon{
     margin-left: 7.5px;
     margin-top: -25px;
     position: relative;
-    z-index: 2;
+    z-index: 1;
 		color: #101010;
 }
 
