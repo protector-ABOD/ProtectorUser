@@ -8,8 +8,8 @@ export const composer = ({context, clearErrors}, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
-  // requestForAgent: actions.matchmaker.requestForAgent,
-  // navigationAfterConfirm: actions.matchmaker.navigationAfterConfirm,
+  rateAgent: actions.users.rateAgent,
+  searchForServices: actions.matchmaker.searchForServices,
   context: () => context
 });
 

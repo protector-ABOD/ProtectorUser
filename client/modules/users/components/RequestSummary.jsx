@@ -31,6 +31,21 @@ export default class RequestSummary extends Component {
 		}
 	}
 
+	handleClickRejectedRequest(event){
+		const {searchForServices} = this.props;
+		serviceRequest = {};
+		serviceRequest["_id"] = this.props.request._id;
+		searchForServices(serviceRequest);
+	}
+
+	handleClickRateButton(event){
+		const {rateAgent} = this.props;
+		const {rating, comment} = this.refs;
+    var result = rateAgent(this.props.request._id, +rating.value, comment.value);
+		this.closeModal();
+
+	}
+
 	openModal() {
     this.setState({modalIsOpen: true});
   }
@@ -45,6 +60,11 @@ export default class RequestSummary extends Component {
   }
 
 	modalComponent() {
+		var optionRating = [];
+		for (var i = 1; i <= 5; i++) {
+			optionRating.push(<option key={i} value={i}>{i}</option>);
+		}
+
 		return (
 			<Modal
 				isOpen={this.state.modalIsOpen}
@@ -73,12 +93,16 @@ export default class RequestSummary extends Component {
 					<span className="pull-right"> Yesterday </span>
 					<div style={{clear: 'both'}}></div>
 				</div>
-				<div className="row" style={{height: '150px'}}>
+				<div className="row" style={{minHeight: '150px'}}>
 					<span> Comment </span>
-					<input type="text" style={{height: '100%'}} className="form-control" id="serviceType" ref="serviceType"/>
+					<textarea ref="comment" type="text" style={{height: '100px', resize: 'none'}} className="form-control" id="serviceType"></textarea>
+					<span> Rating </span>
+					<select className="form-control" ref="rating" defaultValue="3">
+						{optionRating}
+					</select>
 				</div>
 				<div className="row">
-					<p><button className="btn btn-primary btn-100">Rate</button></p>
+					<p><button className="btn btn-primary btn-100" onClick={this.handleClickRateButton.bind(this)}>Rate</button></p>
 				</div>
 			</Modal>
 		)
@@ -92,11 +116,16 @@ export default class RequestSummary extends Component {
 			statusTextClass = "request-pending";
 		} else if (this.props.request.Service_Request_Status == SERVICE_REQUEST_REJECTED) {
 			statusTextClass = "request-rejected";
+			clickHandler = this.handleClickRejectedRequest.bind(this);
 		} else if (this.props.request.Service_Request_Status == SERVICE_REQUEST_COMPLETED){
 			statusTextClass = "request-completed";
-			modalComponent = this.modalComponent();
-			clickHandler = this.handleClickCompletedRequest.bind(this);
+			if (!this.props.request.Rating_By_User) {
+				modalComponent = this.modalComponent();
+				clickHandler = this.handleClickCompletedRequest.bind(this);
+			}
 		}
+
+
 
 		return (
 			<div className={"row agent-summary " + (statusTextClass)} onClick={clickHandler} >
@@ -104,7 +133,7 @@ export default class RequestSummary extends Component {
 					<img src="/images/agent-placeholder.png"/>
 				</div>
 				<div className ="agent-details col-xs-9">
-          <span>{this.props.request.Agent[0].FullName}</span>
+          <span>{this.props.request.Agent.FullName}</span>
           <span>{this.dateToString(this.props.request.Service_Request.Service_Start_Time)}</span>
           <span>{this.props.request.Service_Request_Status}</span>
 				</div>
@@ -115,26 +144,32 @@ export default class RequestSummary extends Component {
 
 
 	render() {
-		// Just render a placeholder container that will be filled in
-		let navigateToPage = null;
-		if (this.props.request.Service_Request_Status == SERVICE_REQUEST_REJECTED) {
-			navigateToPage = "/services/search";
-		}
 
-		if (navigateToPage)
-		{
-			return (
-				<a href={navigateToPage}>
-					{this.requestComponent()}
-				</a>
-			)
-		} else {
-			return (
-				<div>
-					{this.requestComponent()}
-				</div>
-		 )
-		}
+		return (
+			<div>
+				{this.requestComponent()}
+			</div>
+	 )
+		// Just render a placeholder container that will be filled in
+		// let navigateToPage = null;
+		// if (this.props.request.Service_Request_Status == SERVICE_REQUEST_REJECTED) {
+		// 	navigateToPage = "/services/search";
+		// }
+		//
+		// if (navigateToPage)
+		// {
+		// 	return (
+		// 		<a href={navigateToPage}>
+		// 			{this.requestComponent()}
+		// 		</a>
+		// 	)
+		// } else {
+		// 	return (
+		// 		<div>
+		// 			{this.requestComponent()}
+		// 		</div>
+		//  )
+		// }
 	}
 }
 
