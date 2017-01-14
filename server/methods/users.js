@@ -70,6 +70,25 @@ export default function () {
         }
       ]);
       return serviceRequests;
+    },
+    'users.rateAgent'(serviceRequestId, rating, comment) {
+      check(serviceRequestId, Meteor.Collection.ObjectID);
+      check(rating, Number);
+      check(comment, String);
+
+      const selector = {
+        User_ID: this.userId,
+        _id: serviceRequestId
+      }
+
+      const setter = {
+        $set: {
+          Comment_By_User: comment,
+          Rating_By_User: rating
+        }
+      }
+
+      ServiceRequest.update(selector, setter);
     }
 
   });

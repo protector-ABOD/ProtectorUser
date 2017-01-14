@@ -77,10 +77,10 @@ export default function () {
     },
     'agent.getDetails'(agentId) {
       check(agentId, Meteor.Collection.ObjectID)
-      var selector = {Agent_ID: agentId};
+      var selector = {_id: agentId};
       //return list of service requests under user
-      const agent = Agent.find(selector).fetch();
-      console.log(agent);
+      const agent = Agents.find(selector).fetch();
+      console.log(agent[0].FullName);
       return agent;
     }
   });

@@ -17,7 +17,7 @@ export default {
 	Accounts.createUser({
 	  email: emailVar,
 	  password: passwordVar
-	}, 
+	},
 	  function(error) {
 		if (error) {
 		  LocalState.set('ERROR', 'Failed to create account.');
@@ -45,6 +45,13 @@ export default {
   		}
   		else{
   			FlowRouter.go('/services/search')
+  		}
+  	});
+  },
+  rateAgent({Meteor, FlowRouter}, serviceRequestId, rating, comment){
+  	Meteor.call('users.rateAgent', serviceRequestId, rating, comment, (err) =>{
+  		if(err){
+  			console.log(err);
   		}
   	});
   }

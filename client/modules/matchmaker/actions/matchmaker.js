@@ -6,15 +6,10 @@ export default {
     Session.set("ServiceRequest", serviceRequest);
     FlowRouter.go('/services/agent-listing');
   },
-  searchForMatchingAgents({Meteor, LocalState}, _id) {
+  searchForMatchingAgentsByRequestID({Meteor, LocalState}, _id) {
     //
-    Meteor.call('matchmaker.searchForMatchingAgents', _id, (err, response) => {
-      console.log(response);
-      if (err) {
-        return LocalState.set('ERROR', err.message);
-      }
-      return response;
-    })
+    Session.set("ServiceRequest", _id);
+    FlowRouter.go('/services/agent-listing');
   },
   requestForAgent({Meteor, LocalState}, serviceRequest, agent) {
     //
