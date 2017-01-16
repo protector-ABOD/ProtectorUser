@@ -4,7 +4,7 @@ import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
 export const composer = ({context}, onData) => {
   const {Meteor, Collections} = context();
-  if (Meteor.subscribe('userprofile.existingUser', Meteor.userId()).ready()) {
+  if (Meteor.subscribe('userprofile.existingUser').ready()) {
     const userprofile = Collections.UserProfile.findOne({User_ID: Meteor.userId()});
       if (Meteor.subscribe('CodeTable.Bank').ready()) {
       const banks = Collections.CodeTable.findOne({Category: "Bank"}).ValueList;

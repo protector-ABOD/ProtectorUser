@@ -19,7 +19,7 @@ class RequestList extends React.Component {
 		return (
 			<div className="content-container align-middle">
 				<div className="row">
-					<header className="title"> Result </header>
+					<header className="title"> Requests </header>
 				</div>
 				<div className="row">
 					<div className="col-xs-12 pad-all-20">

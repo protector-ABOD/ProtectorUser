@@ -43,9 +43,6 @@ export default function () {
     'matchmaker.searchForMatchingAgents'(serviceRequest) {
       check(serviceRequest, Object);
 
-      console.log(serviceRequest);
-
-
       //populate variables
       var request = new Object();
       var rejectList;
@@ -68,6 +65,22 @@ export default function () {
         selector['Skills'] = {$elemMatch: {SkillID:SKILLID_FIREARM, Proficiency: "Yes"}};
       }
 
+      //filter out unavailable agents
+      var startofDay = new Date(request.Service_Start_Time);
+      startofDay.setHours(0,0,0,0);
+      var endOfDay = new Date(request.Service_Start_Time);
+      endOfDay.setHours(23,59,59,999);
+      selector['Schedule'] = {
+        $elemMatch: {
+          'Availability': SCHEDULE_AVAILABLE,
+          $and:[{
+            'Date': {$gte: startofDay}
+          },{
+            'Date': {$lte: endOfDay}
+          }]
+        }
+      }
+
       //filter out rejected agents
       if (rejectList) {
         selector['_id'] = {$nin: rejectList};
@@ -75,6 +88,7 @@ export default function () {
 
       //return list of agents
       const agents = Agents.find(selector).fetch();
+      console.log(agents);
       return agents;
 
     },
