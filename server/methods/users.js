@@ -9,8 +9,8 @@ export default function () {
         check(userId, String);
         const createdAt = new Date();
 
-	  	UserProfile.upsert({User_ID: userId}, {
-	  		User_ID : userId,
+	  	UserProfile.upsert({User_ID: this.userId}, {
+	  		User_ID : this.userId,
 	        Full_Name : userProfile.fullName,
 	        Contact_Number : userProfile.contactNumber,
 			NRIC : userProfile.NRIC,

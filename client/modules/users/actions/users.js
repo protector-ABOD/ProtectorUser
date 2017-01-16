@@ -23,6 +23,7 @@ export default {
 		  LocalState.set('ERROR', 'Failed to create account.');
 		}
 		else{
+      Meteor.call('users.createProfile', Meteor.userId());
 			FlowRouter.go('/user/home');
 		}
 	});

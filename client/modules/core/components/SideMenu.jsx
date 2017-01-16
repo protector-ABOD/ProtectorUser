@@ -28,7 +28,7 @@ class SideMenu extends React.Component {
 						<a id="favourite" className="menu-item" href="/"><i className="fa fa-fw fa-star" /><span>Favorite</span></a>
 						<a id="scheduled" className="menu-item" href="/"><i className="fa fa-fw fa-calendar" /><span>Scheduled</span></a>
 						<a id="notification" className="menu-item" href="/"><i className="fa fa-fw fa-bell" /><span>Notication</span></a>
-						<a id="signout" className="menu-item" href="/"><i className="fa fa-fw fa-sign-out" /><span>Sign Out</span></a>
+						<a id="signout" className="menu-item" href="/logout"><i className="fa fa-fw fa-sign-out" /><span>Sign Out</span></a>
 				</Menu>
 		)
 	}

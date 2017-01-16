@@ -3,8 +3,7 @@ import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
 export default function () {
-  Meteor.publish('userprofile.existingUser', function (userId) {
-  	check(userId, String);
-    return UserProfile.find({User_ID: userId});
+  Meteor.publish('userprofile.existingUser', function () {
+    return UserProfile.find({User_ID: this.userId});
   });
 }

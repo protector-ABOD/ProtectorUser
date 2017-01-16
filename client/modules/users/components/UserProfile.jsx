@@ -21,7 +21,7 @@ class UserProfile extends React.Component {
 						<div className="form-group">
 							<label htmlFor="NRIC">IC Number</label>
 							<input type="text" className="form-control" id="NRIC" ref="NRIC" defaultValue={userprofile.NRIC}/>
-						</div>   
+						</div>
 						<div className="form-group">
 							<label htmlFor="contactNumber">Contact Number</label>
 							<input type="text" className="form-control" id="contactNumber" ref="contactNumber" defaultValue={userprofile.Contact_Number}/>
@@ -159,7 +159,7 @@ class UserProfile extends React.Component {
 				if(expiryMonthClassName.includes("input-error")){
 					expiryMonth.className = expiryMonthClassName.replace(" input-error", "");
 				}
-			}		
+			}
 			if(expiryYear.value.trim() === "") {
 				if(!expiryYearClassName.includes("input-errorr")){
 					expiryYear.className = expiryYearClassName + " input-error";
@@ -203,11 +203,11 @@ class UserProfile extends React.Component {
 		){
 			//Do Credit Card Verification
 			console.log("Do Credit Card Checking");
-			var a = prompt("Give a reason");
-			console.log(a);
+			// var a = prompt("Give a reason");
+			// console.log(a);
 			proceedSave = true;
 		}
-		
+
 		if(proceedSave){
 			//save data
 			var userProfile = {};

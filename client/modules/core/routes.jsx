@@ -2,6 +2,7 @@ import React from 'react';
 import {mount} from 'react-mounter';
 
 import Layout from './components/MainLayout.jsx';
+import LayoutWithoutSideMenu from './components/MainLayoutWithoutSideMenu.jsx';
 import LoginLayout from './components/LoginLayout.jsx';
 import Home from './components/Home.jsx';
 import Login from '../users/containers/Login.js';
@@ -25,6 +26,7 @@ function checkLoggedIn (ctx, redirect) {
 
 export default function (injectDeps, {FlowRouter}) {
   const MainLayoutCtx = injectDeps(Layout);
+  const MainLayoutWithoutSideMenuCtx = injectDeps(LayoutWithoutSideMenu);
   const LoginLayoutCtx = injectDeps(LoginLayout);
 
   var privateRoutes = FlowRouter.group({
@@ -45,7 +47,7 @@ export default function (injectDeps, {FlowRouter}) {
     name: 'users.logout',
     action() {
       Meteor.logout();
-      FlowRouter.go('/');
+      FlowRouter.go('/login');
     }
   });
 
@@ -69,7 +71,7 @@ export default function (injectDeps, {FlowRouter}) {
   privateRoutes.route('/user/profile', {
     name: 'user.profile',
     action(){
-      mount(MainLayoutCtx, {
+      mount(MainLayoutWithoutSideMenuCtx, {
         content: () => (<UserProfile />)
       });
     }
