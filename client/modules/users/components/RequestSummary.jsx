@@ -56,7 +56,9 @@ export default class RequestSummary extends Component {
   }
 
   dateToString(date) {
-    return date.toString();
+		function pad(s) { return (s < 10) ? '0' + s : s; }
+	  var d = new Date(date);
+	  return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
   }
 
 	modalComponent() {
@@ -78,6 +80,7 @@ export default class RequestSummary extends Component {
 						<img src="/images/agent-placeholder.png"/>
 					</div>
 					<div className ="agent-details col-xs-9">
+						<p>{this.props.request.Agent.FullName}</p>
 						<div class="rating">
 							<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
 						</div>
@@ -125,17 +128,19 @@ export default class RequestSummary extends Component {
 			}
 		}
 
-
-
 		return (
 			<div className={"row agent-summary " + (statusTextClass)} onClick={clickHandler} >
 				<div className="agent-image col-xs-3">
 					<img src="/images/agent-placeholder.png"/>
 				</div>
-				<div className ="agent-details col-xs-9">
-          <span>{this.props.request.Agent.FullName}</span>
-          <span>{this.dateToString(this.props.request.Service_Request.Service_Start_Time)}</span>
-          <span>{this.props.request.Service_Request_Status}</span>
+				<div className ="agent-details col-xs-5">
+					<p>{this.props.request.Agent.FullName}</p>
+					<p>{this.dateToString(this.props.request.Service_Request.Service_Start_Time)}</p>
+					<p>{this.props.request.Service_Request.Service_State_Code}</p>
+				</div>
+				<div className ="agent-details col-xs-4">
+					<p className="status">{this.props.request.Service_Request_Status}</p>
+          <p>{this.props.request.Service_Request.Service_Type_Code}</p>
 				</div>
 				{modalComponent}
 			</div>

@@ -5442,6 +5442,27 @@ header.title {
   padding: 18px;
   color: #101010;
 }
+
+.agent-details > p {
+	padding: 2px;
+}
+
+.agent-details > p.status {
+	font-weight: bold;
+}
+
 .agent-details > .agent-description {
 	font-size: 11px;
+}
+
+.request-pending, .request-pending p.status {
+    color: grey;
+}
+
+.request-completed p.status {
+    color: green;
+}
+
+.request-rejected, .request-rejected p.status {
+    color: red;
 }
