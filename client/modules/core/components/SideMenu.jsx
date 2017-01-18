@@ -23,11 +23,13 @@ class SideMenu extends React.Component {
 							<img className="menu-portrait" src="http://lorempixel.com/200/200" />
 							<span>{this.props.userprofile.Full_Name}</span>
 						</div>
-						<a id="payment-info" className="menu-item" href="/"><i className="fa fa-fw fa-credit-card-alt" /><span>Payment Info</span></a>
+            <a id="profile" className="menu-item" href="/user/profile"><i className="fa fa-fw fa-user" /><span>Profile</span></a>
 						<a id="requests" className="menu-item" href="/requests"><i className="fa fa-fw fa-clock-o" /><span>Requests</span></a>
+            <a id="search" className="menu-item" href="/services/search"><i className="fa fa-fw fa-search" /><span>Search services</span></a>
+            {/*<a id="payment-info" className="menu-item" href="/user/profile"><i className="fa fa-fw fa-credit-card-alt" /><span>Payment Info</span></a>
 						<a id="favourite" className="menu-item" href="/"><i className="fa fa-fw fa-star" /><span>Favorite</span></a>
 						<a id="scheduled" className="menu-item" href="/"><i className="fa fa-fw fa-calendar" /><span>Scheduled</span></a>
-						<a id="notification" className="menu-item" href="/"><i className="fa fa-fw fa-bell" /><span>Notication</span></a>
+						<a id="notification" className="menu-item" href="/"><i className="fa fa-fw fa-bell" /><span>Notication</span></a>*/}
 						<a id="signout" className="menu-item" href="/logout"><i className="fa fa-fw fa-sign-out" /><span>Sign Out</span></a>
 				</Menu>
 		)

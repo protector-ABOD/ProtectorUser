@@ -5351,6 +5351,8 @@ button.close {
   position: relative;
   display: block;
   margin: 0px auto;
+	height: 175px;
+	background-color: #b9afaf;
 }
 
 .portrait-container{
