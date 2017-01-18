@@ -5449,6 +5449,11 @@ header.title {
 	padding: 2px;
 }
 
+.agent-details > .rating {
+    color: #fec524;
+    padding: 5px 0px 5px 0px;
+}
+
 .agent-details > p.status {
 	font-weight: bold;
 }

@@ -86,10 +86,21 @@ export default function () {
         selector['_id'] = {$nin: rejectList};
       }
 
-      //return list of agents
+      //get list of agents
       const agents = Agents.find(selector).fetch();
-      console.log(agents);
-      return agents;
+
+      //populate agent ratings
+      var agentsWithRating = _.map(agents, function(agent) {
+        var rating = Meteor.call("agent.getRating", agent._id);
+        agent["Rating"] = rating;
+        return agent;
+      });
+      var sortedByRating = _.sortBy(agentsWithRating, function(agent) {
+        return -agent.Rating;
+      });
+
+
+      return sortedByRating;
 
     },
     'matchmaker.requestForAgent'(serviceRequest, agent, userId) {

@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 // import AgentDetailsPopup from '/client/modules/core/components/PopupModal.jsx';
 import Modal from 'react-modal';
+import Rating from 'react-rating';
 require('/client/modules/core/components/popupmodal.css');
 
 
@@ -83,8 +84,13 @@ export default class AgentSummary extends Component {
 				</div>
 				<div className ="agent-details col-xs-9">
 					{this.props.agent.FullName}
-					<div class="rating">
-						<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+					<div className="rating">
+						<Rating
+							initialRate={(this.props.agent.Rating === 0 ? 5: this.props.agent.Rating)}
+							readonly='true'
+							empty= 'fa fa-star-o fa-lg'
+							full= 'fa fa-star fa-lg'
+						/>
 					</div>
 					<span className="agent-description">
 						20 years on the field experience.
@@ -105,8 +111,13 @@ export default class AgentSummary extends Component {
 						</div>
 						<div className ="agent-details col-xs-9">
 							{this.props.agent.FullName}
-							<div class="rating">
-								<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+							<div className="rating">
+								<Rating
+									initialRate={(this.props.agent.Rating === 0 ? 5: this.props.agent.Rating)}
+									readonly='true'
+									empty= 'fa fa-star-o fa-lg'
+									full= 'fa fa-star fa-lg'
+								/>
 							</div>
 						</div>
 					</div>
