@@ -47,6 +47,12 @@ export default class RequestSummary extends Component {
 
 	}
 
+	handleClickAcceptedRequest(event){
+		if (!this.state.modalIsOpen) {
+			this.openModal();
+		}
+	}
+
 	openModal() {
     this.setState({modalIsOpen: true});
   }
@@ -61,6 +67,17 @@ export default class RequestSummary extends Component {
 	  var d = new Date(date);
 	  return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/');
   }
+
+	formatAMPM(date) {
+	  var hours = date.getHours();
+	  var minutes = date.getMinutes();
+	  var ampm = hours >= 12 ? 'PM' : 'AM';
+	  hours = hours % 12;
+	  hours = hours ? hours : 12; // the hour '0' should be '12'
+	  minutes = minutes < 10 ? '0'+minutes : minutes;
+	  var strTime = hours + ':' + minutes + ' ' + ampm;
+	  return strTime;
+	}
 
 	modalComponent() {
 		var optionRating = [];
@@ -117,6 +134,48 @@ export default class RequestSummary extends Component {
 		)
 	}
 
+	requestDetailsModalComponent() {
+		var optionRating = [];
+		for (var i = 1; i <= 5; i++) {
+			optionRating.push(<option key={i} value={i}>{i}</option>);
+		}
+
+		return (
+			<Modal
+				isOpen={this.state.modalIsOpen}
+				onRequestClose={this.closeModal}
+				style={customStyles}
+				contentLabel="Request Details"
+				className="ReactModal-service-detail"
+			>
+				<div className="row service-details">
+					<span className="list-icon fa fa-fw fa-briefcase fa-lg"></span>
+					<span> {this.props.request.Service_Request.Service_Type_Description} </span>
+				</div>
+				<div className="row service-details">
+					<span className="list-icon fa fa-fw fa-map-marker fa-lg"></span>
+						<span> {this.props.request.Service_Request.Service_State_Description} </span>
+				</div>
+				<div className="row service-details">
+					<span className="list-icon fa fa-fw fa-calendar fa-lg"></span>
+					<span> {this.dateToString(this.props.request.Service_Request.Service_Start_Time)}    {this.formatAMPM(this.props.request.Service_Request.Service_Start_Time)}  </span>
+				</div>
+				<div className="row service-details">
+					<span className="list-icon fa fa-fw fa-clock-o fa-lg"></span>
+					<span> {this.props.request.Service_Request.Service_Duration_Value} Hours </span>
+				</div>
+				<div className="row service-price pad-top-fixed-15">
+					<span className="pull-left">Total Charged:</span> <br />
+					<span className="pull-left currency">{CURRENT_CURRENCY}</span>
+					<p className="pull-right price">{this.props.request.Service_Request.Service_Total_Price}</p>
+				</div>
+				<div className="row">
+					<button className="modal btn btn-primary btn-100" onClick={this.closeModal.bind(this)}>Close</button>
+				</div>
+			</Modal>
+		)
+	}
+
 	requestComponent() {
 		let statusTextClass = null;
 		let modalComponent = null;
@@ -132,6 +191,10 @@ export default class RequestSummary extends Component {
 				modalComponent = this.modalComponent();
 				clickHandler = this.handleClickCompletedRequest.bind(this);
 			}
+		} else if (this.props.request.Service_Request_Status == SERVICE_REQUEST_ACCEPTED) {
+			statusTextClass = "request-accepted";
+			modalComponent = this.requestDetailsModalComponent();
+			clickHandler = this.handleClickAcceptedRequest.bind(this);
 		}
 
 		return (
@@ -142,11 +205,11 @@ export default class RequestSummary extends Component {
 				<div className ="agent-details col-xs-5">
 					<p>{this.props.request.Agent.FullName}</p>
 					<p>{this.dateToString(this.props.request.Service_Request.Service_Start_Time)}</p>
-					<p>{this.props.request.Service_Request.Service_State_Code}</p>
+					<p>{this.props.request.Service_Request.Service_State_Description}</p>
 				</div>
 				<div className ="agent-details col-xs-4">
 					<p className="status">{this.props.request.Service_Request_Status}</p>
-          <p>{this.props.request.Service_Request.Service_Type_Code}</p>
+          <p>{this.props.request.Service_Request.Service_Type_Description}</p>
 				</div>
 				{modalComponent}
 			</div>

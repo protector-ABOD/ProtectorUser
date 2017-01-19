@@ -5473,3 +5473,36 @@ header.title {
 .request-rejected, .request-rejected p.status {
     color: red;
 }
+
+.row.service-details {
+    padding: 13px 10px;
+    margin: 4px 0;
+    background-color: #061b2b;
+    color: white;
+    border-radius: 5px;
+}
+
+span.list-icon {
+    margin-right: 8px;
+    color: #fec524;
+}
+
+.row.service-price.pad-top-fixed-15 {
+    background-color: #061b2b;
+    color: white;
+    padding: 10px;
+}
+
+span.pull-left.currency {
+    color: #fec524;
+}
+
+p.pull-right.price {
+    color: #fec524;
+}
+
+button.modal {
+	margin: 6px 0;
+	padding: 10px 0;
+	background-color: #061b2b;
+}
