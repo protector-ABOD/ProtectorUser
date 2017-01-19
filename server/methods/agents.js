@@ -1,4 +1,4 @@
-import {Agents} from '/lib/collections';
+import {Agents, ServiceRequest} from '/lib/collections';
 import {Meteor} from 'meteor/meteor';
 import {check} from 'meteor/check';
 
@@ -82,6 +82,39 @@ export default function () {
       const agent = Agents.find(selector).fetch();
       console.log(agent[0].FullName);
       return agent;
+    },
+  	'agent.getRating'(agentId) {
+      check( agentId, Meteor.Collection.ObjectID );
+  		const agentSelector = {_id: agentId};
+  		const agent = Agents.findOne(agentSelector);
+			const _id = new MongoInternals.NpmModule.ObjectID(agent._id._str);
+			const filter = {
+				Agent_ID : _id,
+				Service_Request_Status : "Completed",
+				Active_Status : 1
+			}
+
+			const group = {
+				"_id" : {
+					Agent_ID : '$Agent_ID'
+				},
+				"averageRating": {
+					$avg: '$Rating_By_User'
+				}
+			};
+      const ratingArray = ServiceRequest.aggregate(
+				{
+					$match:filter
+				},
+				{
+					$group : group
+				}
+			);
+      if (ratingArray[0]) {
+        return ratingArray[0]["averageRating"];
+      } else {
+        return 0
+      }
     }
   });
 }

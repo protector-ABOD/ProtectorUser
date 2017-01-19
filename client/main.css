@@ -5351,6 +5351,8 @@ button.close {
   position: relative;
   display: block;
   margin: 0px auto;
+	height: 175px;
+	background-color: #b9afaf;
 }
 
 .portrait-container{
@@ -5445,6 +5447,11 @@ header.title {
 
 .agent-details > p {
 	padding: 2px;
+}
+
+.agent-details > .rating {
+    color: #fec524;
+    padding: 5px 0px 5px 0px;
 }
 
 .agent-details > p.status {

@@ -46,8 +46,6 @@ class Layout extends React.Component {
 					<div id="profile-nav">
 
 
-						<img id="profile_nav_img3" src="/images/profile_menu.png" onClick={this.handleClickSideMenu.bind(this)} style={sideMenuStyle}/>
-
 						<img id="profile_nav_img2" src="/images/profile_logo.png" />
 
 

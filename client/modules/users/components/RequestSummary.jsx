@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 // import AgentDetailsPopup from '/client/modules/core/components/PopupModal.jsx';
 import Modal from 'react-modal';
+import Rating from 'react-rating';
 require('/client/modules/core/components/popupmodal.css');
 
 
@@ -100,6 +101,11 @@ export default class RequestSummary extends Component {
 					<span> Comment </span>
 					<textarea ref="comment" type="text" style={{height: '100px', resize: 'none'}} className="form-control" id="serviceType"></textarea>
 					<span> Rating </span>
+					{/*<Rating
+						initialRate='3'
+						empty= 'fa fa-star-o fa-lg'
+						full= 'fa fa-star fa-lg'
+					/>*/}
 					<select className="form-control" ref="rating" defaultValue="3">
 						{optionRating}
 					</select>
