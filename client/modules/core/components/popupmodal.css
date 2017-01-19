@@ -10,11 +10,12 @@
   right: auto;
   bottom: auto;
   border: 1px solid rgb(204, 204, 204);
-  background: rgb(255, 255, 255);
+  background: #f9f9f9;
   overflow: auto;
   border-radius: 4px;
   outline: none;
   padding: 20px;
+  min-width: 370px;
   margin-right: -50%;
   color: black;
   -webkit-transition: all 0.3s;
@@ -41,4 +42,7 @@
 
 .ReactModal__Content .row{
   margin: 0;
+}
+.ReactModal-service-detail {
+  padding: 7px;
 }

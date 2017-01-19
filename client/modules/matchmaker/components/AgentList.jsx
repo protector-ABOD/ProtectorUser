@@ -9,9 +9,14 @@ class AgentList extends React.Component {
   }
 
 	renderAgents() {
-		return this.props.agentList.map((agent) => (
-      <AgentSummary key={agent._id} agent={agent} />
-    ));
+		if (this.props.agentList.length > 0) {
+			return this.props.agentList.map((agent) => (
+	      <AgentSummary key={agent._id} agent={agent} />
+	    ));
+		} else {
+			return "No Agent Matched."
+		}
+
 	}
 
 	render() {

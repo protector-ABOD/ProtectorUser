@@ -11,7 +11,7 @@ export const composer = ({context, clearErrors}, onData) => {
   //search agents
   if (Session.get("ServiceRequest")){
     Meteor.call('matchmaker.searchForMatchingAgents', Session.get("ServiceRequest"), (err, agentList) => {
-      onData(null, {agentList}, Session.get("ServiceRequest")._id);
+      onData(null, {agentList});
     });
   }
 
