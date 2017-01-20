@@ -68,10 +68,19 @@ export default function (injectDeps, {FlowRouter}) {
     }
   });
 
+  privateRoutes.route('/user/firstlogin', {
+    name: 'user.firstlogin',
+    action(){
+      mount(MainLayoutWithoutSideMenuCtx, {
+        content: () => (<UserProfile />)
+      });
+    }
+  });
+
   privateRoutes.route('/user/profile', {
     name: 'user.profile',
     action(){
-      mount(MainLayoutWithoutSideMenuCtx, {
+      mount(MainLayoutCtx, {
         content: () => (<UserProfile />)
       });
     }

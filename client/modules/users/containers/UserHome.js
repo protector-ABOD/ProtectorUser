@@ -8,7 +8,7 @@ export const composer = ({context}, onData) => {
     const userprofile = Collections.UserProfile.findOne({User_ID: Meteor.userId()});
 
     if(!userprofile || userprofile.Full_Name.trim() === ""){
-      FlowRouter.go("/user/profile");
+      FlowRouter.go("/user/firstlogin");
     }
     else{
       FlowRouter.go("/services/search");
